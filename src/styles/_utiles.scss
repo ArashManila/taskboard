@@ -1,0 +1,11 @@
+.container{
+    margin-inline:auto;
+    max-width:calc(var(--container-width) + var(--padding-inline)*2);
+    padding-inline: var(--padding-block);
+}
+
+@mixin reset-button{
+    padding:0;
+    color:transparent;
+    border:none;
+}

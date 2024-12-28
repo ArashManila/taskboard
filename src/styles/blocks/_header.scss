@@ -1,0 +1,6 @@
+.header{
+    @include flex-center;
+    flex-direction: column;
+    row-gap: var(--padding-small);
+    margin-bottom: 40px;
+}

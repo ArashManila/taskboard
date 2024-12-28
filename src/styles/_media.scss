@@ -1,0 +1,8 @@
+$tablet:1024px;
+$tablet-above:1025px;
+
+@mixin tablet{
+    @media(width < $tablet){
+        @content;
+    }
+}

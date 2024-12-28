@@ -1,0 +1,11 @@
+
+
+@mixin flex-center($IsInline:false){
+    @if $IsInline{
+        display:inline-flex;
+    }@else{
+        display: flex;
+    }
+    justify-content:center;
+    align-items:center;
+}

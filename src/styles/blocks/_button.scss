@@ -1,0 +1,33 @@
+.button{
+    @include reset-button;
+    
+    height: var(--button-height);
+    @include flex-center(true);
+    padding-inline: 20px;
+    border-radius:var(--border-radius-small);
+    padding-block:8px;
+    color:#000;
+    cursor: pointer;
+
+    &-pink{
+        background-color: var(--color-pink);
+    }
+
+    &-yellow{
+        background-color: var(--color-yellow);
+    }
+
+    &-gray{
+        background-color: var(--color-gray);
+    }
+    &-gray-dark{
+        background-color: var(--color-gray-dark);
+    }
+    &-add{
+        border:none;
+        width: 35px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+
+    }
+}
