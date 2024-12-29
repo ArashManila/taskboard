@@ -1,6 +1,12 @@
 import { useState } from "react";
 
-const SetDataForm = ({changeData,placeholder,close,prev})=>{
+type DataFormProps={
+    placeholder?:string,
+    prev:string,
+    close:()=>void,
+    changeData:(prev:string)=>void
+}
+const SetDataForm = ({changeData,placeholder,close,prev}: DataFormProps)=>{
         
     const[newData,setNewData] = useState(prev);
     const saveData = ()=>{

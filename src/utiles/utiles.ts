@@ -1,4 +1,4 @@
-const makeid = length => {
+const makeid = (length:number) => {
     let text = "";
     const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 

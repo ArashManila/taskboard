@@ -5,6 +5,7 @@ import getData from "./DataManagment/getData";
 import Modal from "./components/Modal/Modal";
 import AuthForm from "./components/Forms/AuthForm";
 import Header from "./components/Header/Header";
+import Main from "./components/Main";
 
 
 function App() {
@@ -24,7 +25,7 @@ function App() {
         <AuthForm setActive ={setIsActive} name={userName} setName={setUserName}/>
       </Modal>}
       <Header/>
-      {/* <Main /> */}
+      <Main />
 
       
     </>
