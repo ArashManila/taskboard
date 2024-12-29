@@ -8,16 +8,27 @@ import Modal from "../Modal/Modal";
 import SetDataForm from "../Forms/SetDataForm";
 
 
+
 type TableProps={
   tableId:number,
+  rename:(arg:Object)=>void
 }
 
-const Table = ({tableId}:TableProps)=>{
+const Table = ({rename,tableId}:TableProps)=>{
   
-  const [tableName,setTableName] = useState<string>(getData.GetFornmatted("Tablesdata")[tableId].name);
+  const [tableName,setTableName] = useState<string>(getData.GetTableData(tableId)) ;
   const [active,setActive] = useState<boolean>(false);
 
   const close=()=>setActive(false);
+
+  const NewName=(e:string)=>{
+    let newData = structuredClone(getData.GetFornmatted('Tablesdata'));
+    newData[tableId].name = e;
+    setTableName(e.toString());
+    rename(newData);
+  }
+
+
   
   return(
     <li className="board-item" >
@@ -26,7 +37,7 @@ const Table = ({tableId}:TableProps)=>{
         <div>
           <img src={Edit} alt="edit" onClick={()=>setActive(true)}/>
           {active && <Modal active={active} setActive={setActive}>
-            <SetDataForm changeData={setTableName} placeholder="Enter new title" prev={tableName} close={close}/>
+            <SetDataForm changeData={(e)=>NewName(e)} placeholder="Enter new title" prev={tableName} close={close}/>
           </Modal>}
         </div>
       </div>

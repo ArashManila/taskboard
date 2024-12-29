@@ -27,9 +27,13 @@ const Main = () => {
   });
   
 
+  
   useEffect(() => {
-    setData.Set("Tablesdata",JSON.stringify(Object.fromEntries(tableNameMap.entries())))
+    setData.Set("Tablesdata",JSON.stringify(TableNames))
+    console.log(1);
+    
   }, [TableNames]);
+  
 
   
 
@@ -38,10 +42,10 @@ const Main = () => {
     <main className="content container">
       <div className="board">
         <ul className="board__list">
-          <Table tableId={0} />
-          <Table tableId={1} />
-          <Table tableId={2} />
-          <Table tableId={3} />
+          <Table tableId={0} rename={setTableNames}/>
+          <Table tableId={1} rename={setTableNames}/>
+          <Table tableId={2} rename={setTableNames}/>
+          <Table tableId={3} rename={setTableNames}/>
         </ul>
       </div>
     </main>
