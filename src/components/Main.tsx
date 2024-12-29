@@ -30,8 +30,6 @@ const Main = () => {
   
   useEffect(() => {
     setData.Set("Tablesdata",JSON.stringify(TableNames))
-    console.log(1);
-    
   }, [TableNames]);
   
 
