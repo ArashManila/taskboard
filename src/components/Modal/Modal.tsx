@@ -3,7 +3,7 @@ import getData from "../../DataManagment/getData";
 
 type ModalProps = {
   active:boolean,
-  children:ReactNode,
+  children?:ReactNode,
   setActive:(active:boolean)=>void,
 }
 

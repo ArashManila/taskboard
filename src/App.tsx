@@ -15,6 +15,8 @@ function App() {
     useEffect(()=>{
       if(!getData.Get('User name')){
         setIsActive(true);
+        console.log(getData.Get('User name'));
+        
       }
     },[])
 
@@ -26,8 +28,6 @@ function App() {
       </Modal>}
       <Header/>
       <Main />
-
-      
     </>
   )
 }

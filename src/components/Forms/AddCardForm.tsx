@@ -1,7 +1,10 @@
 import { useState } from "react";
 
+type AddCardFormProps={
+    close:()=>void
+}
 
-const AddCardForm = ({create,close})=>{
+const AddCardForm = ({create,close}:AddCardFormProps)=>{
 
     const [card,setCard] = useState({
         title:'',

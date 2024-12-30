@@ -10,7 +10,8 @@ const GetFornmatted= (arg:string)=>{
 }
 
 const GetTableData = (arg:number)=>{
-  return JSON.parse(localStorage.Tablesdata)[arg].name || '';
+  if(localStorage.Tablesdata) return JSON.parse(localStorage.Tablesdata)[arg].name ;
+  else return '';
 }
 
 export default {Get,GetFornmatted,GetTableData};

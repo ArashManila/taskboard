@@ -26,24 +26,23 @@ const Main = () => {
       : Object.fromEntries(tableNameMap.entries())
   });
   
-
-  
   useEffect(() => {
     setData.Set("Tablesdata",JSON.stringify(TableNames))
   }, [TableNames]);
+  
+  
   
 
   
 
   return (
-    
     <main className="content container">
       <div className="board">
         <ul className="board__list">
-          <Table tableId={0} rename={setTableNames}/>
-          <Table tableId={1} rename={setTableNames}/>
-          <Table tableId={2} rename={setTableNames}/>
-          <Table tableId={3} rename={setTableNames}/>
+          {TableNames && <Table tableId={0} rename={setTableNames}/>}
+          {TableNames && <Table tableId={1} rename={setTableNames}/>}
+          {TableNames && <Table tableId={2} rename={setTableNames}/>}
+          {TableNames && <Table tableId={3} rename={setTableNames}/>}
         </ul>
       </div>
     </main>

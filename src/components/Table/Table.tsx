@@ -6,6 +6,7 @@ import Edit from '../../icons/edit.png'
 
 import Modal from "../Modal/Modal";
 import SetDataForm from "../Forms/SetDataForm";
+import AddCard from '../Cards/AddCard';
 
 
 
@@ -41,6 +42,7 @@ const Table = ({rename,tableId}:TableProps)=>{
           </Modal>}
         </div>
       </div>
+      <AddCard tableId={tableId}/>
     </li>
   );
 }
