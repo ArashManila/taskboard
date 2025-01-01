@@ -12,8 +12,14 @@ const AddCard = ({tableId}:AddCardProps) => {
   
   
   const [active, setActive] = useState(false);
+  const [CardState,setCardState] =useState({});
+
 
   const CloseModal = () => setActive(false);
+
+  const CreateCard = (id:number,data:object)=>{
+    
+  }
 
   
   // let tableNameMap = new Map();
