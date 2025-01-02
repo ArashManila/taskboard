@@ -30,11 +30,6 @@ const Main = () => {
     setData.Set("Tablesdata",JSON.stringify(TableNames))
   }, [TableNames]);
   
-  
-  
-
-  
-
   return (
     <main className="content container">
       <div className="board">

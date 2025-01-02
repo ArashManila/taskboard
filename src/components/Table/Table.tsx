@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import getData from "../../DataManagment/getData";
 
@@ -7,6 +7,9 @@ import Edit from '../../icons/edit.png'
 import Modal from "../Modal/Modal";
 import SetDataForm from "../Forms/SetDataForm";
 import AddCard from '../Cards/AddCard';
+import utiles from "../../utiles/utiles";
+import CardItem from "../Cards/CardItem";
+import setData from "../../DataManagment/setData";
 
 
 
@@ -29,7 +32,23 @@ const Table = ({rename,tableId}:TableProps)=>{
     rename(newData);
   }
 
+  let cardsMap = new Map();
+  cardsMap.set(
+    tableId,{id:utiles.makeid(5),title:"placeholder title",desc:"placeholder desc",column:tableId}
+  )
 
+  const [cardsData,setCardsData] = useState<object>(()=>{
+      const data = getData.Get("CardsData");
+      if(data) return JSON.parse(data);
+      else return {};
+    });
+    
+    
+    
+    useEffect(() => {
+      setData.Set("CardsData",JSON.stringify(cardsData))
+    }, [cardsData]);
+    
   
   return(
     <li className="board-item" >
@@ -43,6 +62,13 @@ const Table = ({rename,tableId}:TableProps)=>{
         </div>
       </div>
       <AddCard tableId={tableId}/>
+      <ul className="card__list">
+        {cardsData && Object.entries(cardsData).map(([key,value])=>{
+          if(Number(key) === tableId){
+            return <CardItem content={value} key={value.id}/>
+          }
+        })} 
+      </ul>
     </li>
   );
 }

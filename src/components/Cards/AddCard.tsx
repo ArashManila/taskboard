@@ -57,7 +57,7 @@ const AddCard = ({tableId}:AddCardProps) => {
       </button>
       {active && (
         <Modal active={active} setActive={setActive}>
-          <AddCardForm close={CloseModal} create={create} />
+          <AddCardForm close={CloseModal}  />
         </Modal>
       )}
     </>

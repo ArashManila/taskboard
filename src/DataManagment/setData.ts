@@ -6,8 +6,9 @@ const SetTableData = (arg:number,newVal:string)=>{
   return localStorage.setItem("Tablesdata",JSON.parse(localStorage.Tablesdata)[arg].name=newVal);
 }
 const SetCardData = (arg:number,value:object)=>{
-  if(localStorage.getItem("cardsData")){
-    let c:string  = localStorage.getItem("cardsData");
+  let cardData = localStorage.getItem("cardsData")
+  if(cardData){
+    let c:string  = cardData;
     let copy = {...JSON.parse(c)};
     return copy;
   }
