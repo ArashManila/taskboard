@@ -5,15 +5,21 @@ const Set = (key:string,content:string)=>{
 const SetTableData = (arg:number,newVal:string)=>{
   return localStorage.setItem("Tablesdata",JSON.parse(localStorage.Tablesdata)[arg].name=newVal);
 }
-const SetCardData = (arg:number,value:object)=>{
+const SetCardData = (table:number,value:object)=>{
   let cardData = localStorage.getItem("cardsData")
   if(cardData){
     let c:string  = cardData;
     let copy = {...JSON.parse(c)};
-    return copy;
+    console.log("copy:",copy[1]);
+    console.log("value:",value);
+    let res = Object.assign(copy,value);
+    return localStorage.setItem("cardsData",JSON.stringify(res));
   }
   else{
-    return localStorage.setItem("cardsData",JSON.stringify(value))
+    let newObject:{[key:number]:object} = {};
+    newObject[table] = value;
+    
+    return localStorage.setItem("cardsData",JSON.stringify(newObject))
   }
 }
 

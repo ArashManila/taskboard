@@ -2,7 +2,8 @@ import { useState } from "react";
 
 import Modal from "../Modal/Modal";
 import AddCardForm from "../Forms/AddCardForm";
-import getData from "../../DataManagment/getData";
+//import getData from "../../DataManagment/getData";
+import setData from "../../DataManagment/setData";
 
 type AddCardProps ={
   tableId:number,
@@ -12,13 +13,13 @@ const AddCard = ({tableId}:AddCardProps) => {
   
   
   const [active, setActive] = useState(false);
-  const [CardState,setCardState] =useState({});
+  //const [CardState,setCardState] =useState({});
 
 
   const CloseModal = () => setActive(false);
 
-  const CreateCard = (id:number,data:object)=>{
-    
+  const CreateCard = (data:object)=>{
+    setData.SetCardData(tableId,data);
   }
 
   
@@ -51,13 +52,13 @@ const AddCard = ({tableId}:AddCardProps) => {
     <>
       <button
         className="button-pink button-add board__item-button-add"
-        onClick={()=>console.log(tableId)}
+        onClick={()=>setActive(true)}
       >
         +
       </button>
       {active && (
         <Modal active={active} setActive={setActive}>
-          <AddCardForm close={CloseModal}  />
+          <AddCardForm create={CreateCard} close={CloseModal}  />
         </Modal>
       )}
     </>

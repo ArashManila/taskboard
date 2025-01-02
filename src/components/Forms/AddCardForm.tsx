@@ -1,7 +1,8 @@
 import { useState } from "react";
 
 type AddCardFormProps={
-    close:()=>void
+    close:()=>void,
+    create: (arg:object)=>void
 }
 
 const AddCardForm = ({create,close}:AddCardFormProps)=>{
@@ -11,13 +12,13 @@ const AddCardForm = ({create,close}:AddCardFormProps)=>{
         desc:''
     });
 
-    const handleTitle = (e)=>{
+    const handleTitle = (e:React.ChangeEvent<HTMLInputElement>)=>{
         setCard((prev)=>({
             ...prev,
             title: e.target.value
         }))
     }
-    const handleDesc = (e)=>{
+    const handleDesc = (e:React.ChangeEvent<HTMLInputElement>)=>{
         setCard((prev)=>({
             ...prev,
             desc: e.target.value
@@ -34,14 +35,12 @@ const AddCardForm = ({create,close}:AddCardFormProps)=>{
             desc:''
         })
         close();
-        
-
     }
 
     return (
         <div>
-            <input value={card.title} onChange={handleTitle} name="" id="" cols="30" rows="2" placeholder='Enter Card Title...'></input>
-            <input value={card.desc} onChange={handleDesc}  name="" id="" cols="30" rows="2" placeholder='Enter Card Desc...'></input>
+            <input value={card.title} onChange={handleTitle} name="" id="" placeholder='Enter Card Title...'></input>
+            <input value={card.desc} onChange={handleDesc}  name="" id="" placeholder='Enter Card Desc...'></input>
             <div className='flex p-1'>
                 <button onClick={()=>saveCard()} className='p-1 rounded bg-sky-600 text-white mr-2'>Add Card</button>
             </div>

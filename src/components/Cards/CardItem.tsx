@@ -1,19 +1,18 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 
 import Modal from "../Modal/Modal";
-import SetData from "../Forms/SetDataForm";
+//import SetData from "../Forms/SetDataForm";
 
 import edit from "../../icons/edit.png";
 import addition from "../../icons/add.png";
 import deletion from "../../icons/delete.png";
 
-type content = {
+interface content  {
   title:string,
   desc:string,
 }
 type CardProps={
   content:content,
-  title:string
 }
 
 const CardItem = ({ content }:CardProps) => {
@@ -22,19 +21,16 @@ const CardItem = ({ content }:CardProps) => {
   const [activeDescEdit, setActiveDescEdit] = useState(false);
   const [activeDescCreate, setActiveDescCreate] = useState(false);
   
-  
-  console.log("content",content);
-  
 
-  const closeTitle = () => {
-    setActiveTitleEdit(false);
-  };
-  const closeDescEdit = () => {
-    setActiveDescEdit(false);
-  };
-  const closeDescCreate = () => {
-    setActiveDescCreate(false);
-  };
+  // const closeTitle = () => {
+  //   setActiveTitleEdit(false);
+  // };
+  // const closeDescEdit = () => {
+  //   setActiveDescEdit(false);
+  // };
+  // const closeDescCreate = () => {
+  //   setActiveDescCreate(false);
+  // };
 
   // const RemoveCard = (card) => {
   //   const newList = lists.map((c) => {
