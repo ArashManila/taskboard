@@ -7,6 +7,7 @@ import addition from "../../icons/add.png";
 import deletion from "../../icons/delete.png";
 import getData from "../../DataManagment/getData";
 import SetDataForm from "../Forms/SetDataForm";
+import CardInfo from "./CardInfo";
 
 interface content  {
   title:string,
@@ -130,12 +131,9 @@ const CardItem = ({ content,updateCardState }:CardProps) => {
       </div>
       {activeCard && (
         <Modal setActive={setActiveCard} active={activeCard}>
-          {/* <CardInfo
-            columnIndex={columnIndex}
-            cardIndex={cardIndex}
-            column={column}
+          <CardInfo
             content={content}
-          /> */}
+          />
         </Modal>
       )}
       {activeTitleEdit && (
