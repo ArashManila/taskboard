@@ -5,21 +5,29 @@ const Set = (key:string,content:string)=>{
 const SetTableData = (arg:number,newVal:string)=>{
   return localStorage.setItem("Tablesdata",JSON.parse(localStorage.Tablesdata)[arg].name=newVal);
 }
-const SetCardData = (table:number,value:object)=>{
-  let cardData = localStorage.getItem("cardsData")
-  if(cardData){
-    let c:string  = cardData;
-    let copy = {...JSON.parse(c)};
-    console.log("copy:",copy[1]);
-    console.log("value:",value);
-    let res = Object.assign(copy,value);
-    return localStorage.setItem("cardsData",JSON.stringify(res));
-  }
-  else{
-    let newObject:{[key:number]:object} = {};
-    newObject[table] = value;
-    
-    return localStorage.setItem("cardsData",JSON.stringify(newObject))
+type ValueType = {
+  title: string;
+  desc: string;
+  cardId: string; 
+  tableId: number;
+}
+
+const SetCardData = (table: number, value: ValueType) => {
+  let cardData = localStorage.getItem("cardsData");
+  
+  if (cardData) {
+      let c: string = cardData;
+      let copy: { [key: number]: { [key: string]: ValueType } } = JSON.parse(c);
+      if (!copy[table]) {
+          copy[table] = {};
+      }
+      copy[table][value.cardId] = { ...copy[table][value.cardId], ...value };
+      return localStorage.setItem("cardsData", JSON.stringify(copy));
+  } else {
+      let newObject: { [key: number]: { [key: string]: ValueType } } = {};
+      newObject[table] = {};
+      newObject[table][value.cardId] = value;
+      return localStorage.setItem("cardsData", JSON.stringify(newObject));
   }
 }
 

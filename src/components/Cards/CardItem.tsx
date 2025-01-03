@@ -1,27 +1,32 @@
 import { useState } from "react";
 
 import Modal from "../Modal/Modal";
-//import SetData from "../Forms/SetDataForm";
 
 import edit from "../../icons/edit.png";
 import addition from "../../icons/add.png";
 import deletion from "../../icons/delete.png";
+import getData from "../../DataManagment/getData";
 
 interface content  {
   title:string,
   desc:string,
+  tableId:number,
+  cardId:string
 }
 type CardProps={
   content:content,
+  updateCardState:(arg:object)=>void
 }
 
-const CardItem = ({ content }:CardProps) => {
+const CardItem = ({ content,updateCardState }:CardProps) => {
   const [activeCard, setActiveCard] = useState(false);
   const [activeTitleEdit, setActiveTitleEdit] = useState(false);
   const [activeDescEdit, setActiveDescEdit] = useState(false);
   const [activeDescCreate, setActiveDescCreate] = useState(false);
   
-
+  //console.log("content:",content);
+  
+  
   // const closeTitle = () => {
   //   setActiveTitleEdit(false);
   // };
@@ -32,15 +37,11 @@ const CardItem = ({ content }:CardProps) => {
   //   setActiveDescCreate(false);
   // };
 
-  // const RemoveCard = (card) => {
-  //   const newList = lists.map((c) => {
-  //     return {
-  //       ...c,
-  //       items: c.items.filter((item) => item.id !== card.id),
-  //     };
-  //   });
-  //   setLists(newList);
-  // };
+  const RemoveCard = (card_id:string)=>{
+    let newData=structuredClone(getData.GetFornmatted("cardsData"));
+    delete newData[content.tableId][card_id];
+    updateCardState(newData);
+  }
 
   const HandlePopUp = (e:React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
@@ -100,7 +101,7 @@ const CardItem = ({ content }:CardProps) => {
         <button
           className="card__item-footer-button button button-pink"
           type="button"
-          //onClick={() => RemoveCard(content)}
+          onClick={() => RemoveCard(content.cardId)}
         >
           Delete
         </button>

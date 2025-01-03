@@ -1,15 +1,27 @@
 import { useState } from "react";
+import utiles from "../../utiles/utiles";
+
+interface content  {
+    title:string,
+    desc:string,
+    tableId:number,
+    cardId:string
+  }
 
 type AddCardFormProps={
     close:()=>void,
-    create: (arg:object)=>void
+    create: (arg:content)=>void,
+    tid:number
 }
 
-const AddCardForm = ({create,close}:AddCardFormProps)=>{
+const AddCardForm = ({create,close,tid}:AddCardFormProps)=>{
 
+    const id = utiles.makeid(5);
     const [card,setCard] = useState({
         title:'',
-        desc:''
+        desc:'',
+        cardId:id,
+        tableId:tid
     });
 
     const handleTitle = (e:React.ChangeEvent<HTMLInputElement>)=>{
@@ -32,7 +44,9 @@ const AddCardForm = ({create,close}:AddCardFormProps)=>{
         create(card);
         setCard({
             title:'',
-            desc:''
+            desc:'',
+            cardId:id,
+            tableId:tid
         })
         close();
     }

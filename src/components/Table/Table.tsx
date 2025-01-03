@@ -11,8 +11,6 @@ import utiles from "../../utiles/utiles";
 import CardItem from "../Cards/CardItem";
 import setData from "../../DataManagment/setData";
 
-
-
 type TableProps={
   tableId:number,
   rename:(arg:Object)=>void
@@ -38,18 +36,17 @@ const Table = ({rename,tableId}:TableProps)=>{
   )
 
   const [cardsData,setCardsData] = useState<object>(()=>{
-      const data = getData.Get("CardsData");
+      const data = getData.Get("cardsData");
       if(data) return JSON.parse(data);
       else return {};
     });
     
-    
-    
     useEffect(() => {
-      setData.Set("CardsData",JSON.stringify(cardsData))
+      setData.Set("cardsData",JSON.stringify(cardsData))
     }, [cardsData]);
+
+    const filteredCards:object = cardsData[tableId] || {};
     
-  
   return(
     <li className="board-item" >
       <div className="board__title-wrapper">
@@ -61,13 +58,11 @@ const Table = ({rename,tableId}:TableProps)=>{
           </Modal>}
         </div>
       </div>
-      <AddCard tableId={tableId}/>
+      <AddCard updateCardState={setCardsData} tableId={tableId}/>
       <ul className="card__list">
-        {cardsData && Object.entries(cardsData).map(([key,value])=>{
-          if(Number(key) === tableId){
-            return <CardItem content={value} key={value.id}/>
-          }
-        })} 
+      {Object.entries(filteredCards).map(([key, value]) => (
+          <CardItem updateCardState={setCardsData} content={value} key={key} />
+        ))} 
       </ul>
     </li>
   );
