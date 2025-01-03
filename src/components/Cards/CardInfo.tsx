@@ -5,6 +5,8 @@ import addition from "../../icons/add.png";
 import Modal from "../Modal/Modal";
 //import SetData from "../Forms/SetDataForm";
 import getData from "../../DataManagment/getData";
+import setData from "../../DataManagment/setData";
+import SetDataForm from "../Forms/SetDataForm";
 //import Utils from "../../utiles/utiles";
 
 interface content  {
@@ -18,11 +20,27 @@ type CardInfoProps={
   content:content
 }
 
+type CommentsType = {
+  text:string,
+  commentId:string,
+  user:string
+}
+
 const CardInfo = ({ content }:CardInfoProps) => {
 
   const [activeCommentCreate, setActiveCommentCreate] = useState(false);
 
   //const close = () => setActiveCommentCreate(false);
+
+  // const CreateCard = (data:content)=>{
+  //     setData.SetCardData(tableId,data);
+  //     let newData=structuredClone(getData.GetFornmatted("cardsData"));
+  //     newData[tableId][data.cardId] = {...data};
+  //     updateCardState(newData);
+  //   }
+  const CreateComment = (data:CommentsType)=>{
+    setData.SetCommentdata(content.tableId,data)
+  }
   
 
   return (
@@ -56,12 +74,12 @@ const CardInfo = ({ content }:CardInfoProps) => {
 
       {activeCommentCreate && (
         <Modal active={activeCommentCreate} setActive={setActiveCommentCreate}>
-          {/* <SetData
+          <SetDataForm
             prev={""}
             close={close}
-            changeData={(e) => SetCardComment(e, columnIndex, cardIndex)}
+            changeData={(e:string) => CreateComment(e)}
             placeholder="Enter your comment:"
-          /> */}
+          />
         </Modal>
       )}
     </>

@@ -28,8 +28,6 @@ const AddCard = ({tableId,updateCardState}:AddCardProps) => {
   const [active, setActive] = useState(false);
   //const [CardState,setCardState] =useState({});
 
-  
-
   const CloseModal = () => setActive(false);
 
   const CreateCard = (data:content)=>{
