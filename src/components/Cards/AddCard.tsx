@@ -28,7 +28,6 @@ const AddCard = ({tableId,updateCardState}:AddCardProps) => {
   const [active, setActive] = useState(false);
   //const [CardState,setCardState] =useState({});
 
-  console.log(getData.GetFornmatted("cardsData")[tableId]);
   
 
   const CloseModal = () => setActive(false);
