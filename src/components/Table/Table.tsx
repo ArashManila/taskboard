@@ -7,9 +7,24 @@ import Edit from '../../icons/edit.png'
 import Modal from "../Modal/Modal";
 import SetDataForm from "../Forms/SetDataForm";
 import AddCard from '../Cards/AddCard';
-import utiles from "../../utiles/utiles";
 import CardItem from "../Cards/CardItem";
 import setData from "../../DataManagment/setData";
+
+interface content  {
+  title:string,
+  desc:string,
+  tableId:number,
+  cardId:string
+}
+
+interface CardsData{
+  [tableId:number]:{
+    [cardId:string]:content
+  }
+}
+interface cardContent {
+  [key: string]: content;
+}
 
 type TableProps={
   tableId:number,
@@ -30,7 +45,7 @@ const Table = ({rename,tableId}:TableProps)=>{
     rename(newData);
   }
 
-  const [cardsData,setCardsData] = useState<object>(()=>{
+  const [cardsData,setCardsData] = useState<CardsData>(()=>{
       const data = getData.Get("cardsData");
       if(data) return JSON.parse(data);
       else return {};
@@ -40,7 +55,7 @@ const Table = ({rename,tableId}:TableProps)=>{
       setData.Set("cardsData",JSON.stringify(cardsData))
     }, [cardsData]);
 
-    const filteredCards:object = cardsData[tableId] || {};
+    let filteredCards:cardContent = cardsData[tableId] || {};
     
   return(
     <li className="board-item" >

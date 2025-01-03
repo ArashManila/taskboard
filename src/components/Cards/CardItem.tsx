@@ -13,9 +13,14 @@ interface content  {
   tableId:number,
   cardId:string
 }
+interface CardsData{
+  [tableId:number]:{
+    [cardId:string]:content
+  }
+}
 type CardProps={
   content:content,
-  updateCardState:(arg:object)=>void
+  updateCardState:React.Dispatch<React.SetStateAction<CardsData>>
 }
 
 const CardItem = ({ content,updateCardState }:CardProps) => {
@@ -23,8 +28,6 @@ const CardItem = ({ content,updateCardState }:CardProps) => {
   const [activeTitleEdit, setActiveTitleEdit] = useState(false);
   const [activeDescEdit, setActiveDescEdit] = useState(false);
   const [activeDescCreate, setActiveDescCreate] = useState(false);
-  
-  //console.log("content:",content);
   
   
   // const closeTitle = () => {

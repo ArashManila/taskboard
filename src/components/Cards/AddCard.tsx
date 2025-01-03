@@ -11,10 +11,15 @@ interface content  {
   tableId:number,
   cardId:string
 }
+interface CardsData{
+  [tableId:number]:{
+    [cardId:string]:content
+  }
+}
 
 type AddCardProps ={
   tableId:number,
-  updateCardState:(arg:object)=>void
+  updateCardState:React.Dispatch<React.SetStateAction<CardsData>>
 }
 
 const AddCard = ({tableId,updateCardState}:AddCardProps) => {
