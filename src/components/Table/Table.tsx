@@ -30,11 +30,6 @@ const Table = ({rename,tableId}:TableProps)=>{
     rename(newData);
   }
 
-  let cardsMap = new Map();
-  cardsMap.set(
-    tableId,{id:utiles.makeid(5),title:"placeholder title",desc:"placeholder desc",column:tableId}
-  )
-
   const [cardsData,setCardsData] = useState<object>(()=>{
       const data = getData.Get("cardsData");
       if(data) return JSON.parse(data);

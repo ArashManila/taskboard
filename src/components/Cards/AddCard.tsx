@@ -29,10 +29,10 @@ const AddCard = ({tableId,updateCardState}:AddCardProps) => {
   const CloseModal = () => setActive(false);
 
   const CreateCard = (data:content)=>{
+    setData.SetCardData(tableId,data);
     let newData=structuredClone(getData.GetFornmatted("cardsData"));
     newData[tableId][data.cardId] = {...data};
     updateCardState(newData);
-    setData.SetCardData(tableId,data);
   }
 
   return (
