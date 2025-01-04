@@ -3,12 +3,10 @@ import { useEffect, useState } from "react";
 import addition from "../../icons/add.png";
 
 import Modal from "../Modal/Modal";
-//import SetData from "../Forms/SetDataForm";
 import getData from "../../DataManagment/getData";
 import setData from "../../DataManagment/setData";
 import AddCommentsForm from "../Forms/AddCommentsForm";
 import CommentsBlock from "../Comments/CommentsBlock";
-//import Utils from "../../utiles/utiles";
 
 interface content  {
   title:string,
@@ -24,6 +22,7 @@ type CardInfoProps={
 type CommentsType = {
   text:string,
   commentId:string,
+  user:string
 }
 type CommentsObjectType={
   [key:string]: {[key:string]:CommentsType}
@@ -40,6 +39,7 @@ const CardInfo = ({ content }:CardInfoProps) => {
     if(data) return JSON.parse(data);
     else return {}
   })
+  
 
   useEffect(()=>{
     setData.Set("commentsData",JSON.stringify(commentsData))

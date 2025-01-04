@@ -11,6 +11,7 @@ import SetDataForm from "../Forms/SetDataForm";
 type CommentsType = {
   text:string,
   commentId:string,
+  user:string
 }
 type CommentsObjectType={
   [key:string]: {[key:string]:CommentsType}
@@ -53,7 +54,7 @@ const CommentsBlock = ({ comments,updateCommentsState,card }:CommentBlockProps) 
         Object.entries(comments).map(([key,value]) => (
           <li key={key} className="card__item-comments-item">
             <div className="card__item-comments-item-wrapper">
-              <h4 className="card__item-comments-item-title">o.user</h4>
+              <h4 className="card__item-comments-item-title">{value.user}</h4>
               <div className="card__item-comments-item-abilities-wrapper">
                 <img
                   src={deletion}

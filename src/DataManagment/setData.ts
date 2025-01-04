@@ -1,3 +1,5 @@
+import getData from "./getData";
+
 const Set = (key:string,content:string)=>{
   let result = localStorage.setItem(key,content);
   return result;
@@ -15,6 +17,7 @@ type ValueType = {
 type CommentsType = {
   text:string,
   commentId:string,
+  user:string
 }
 
 const SetCardData = (table: number, value: ValueType) => {
@@ -38,12 +41,14 @@ const SetCardData = (table: number, value: ValueType) => {
 
 const SetCommentdata = (table:string,newComment:CommentsType)=>{
   let commentsData = localStorage.getItem("commentsData");
+  let userName = getData.Get("User name") || 'default name';
 
   if(commentsData){
     let c:string = commentsData;
     let copy: {[key:string]: {[key:string]:CommentsType}} = JSON.parse(c);
     if(!copy[table]) copy[table] = {};
     copy[table][newComment.commentId]={...copy[table][newComment.commentId],...newComment};
+    copy[table][newComment.commentId].user=userName;
     return localStorage.setItem("commentsData",JSON.stringify(copy));
   } else{
     let newObject: {[key:string]: {[key:string]:CommentsType}} = {};

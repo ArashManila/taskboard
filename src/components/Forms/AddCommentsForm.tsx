@@ -1,9 +1,11 @@
 import { useState } from "react";
 import utiles from "../../utiles/utiles";
+import getData from "../../DataManagment/getData";
 
 type CommentsType = {
   text:string,
   commentId:string,
+  user:string
 }
 
 type AddCommentFormProps={
@@ -15,9 +17,11 @@ type AddCommentFormProps={
 const AddCommentsForm = ({create,close,placeholder}:AddCommentFormProps)=>{
 
     const id = utiles.makeid(4);
+    let userName:string=getData.Get("User name") || "defult name";
     const [comment,setComment] = useState({
         text:'',
-        commentId:id
+        commentId:id,
+        user:userName
     });
 
     const handleText = (e:React.ChangeEvent<HTMLInputElement>)=>{
@@ -34,7 +38,8 @@ const AddCommentsForm = ({create,close,placeholder}:AddCommentFormProps)=>{
         create(comment);
         setComment({
             text:'',
-            commentId:id
+            commentId:id,
+            user:userName
         })
         close();
     }
