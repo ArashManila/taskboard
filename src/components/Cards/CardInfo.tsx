@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import addition from "../../icons/add.png";
 
@@ -6,7 +6,8 @@ import Modal from "../Modal/Modal";
 //import SetData from "../Forms/SetDataForm";
 import getData from "../../DataManagment/getData";
 import setData from "../../DataManagment/setData";
-import SetDataForm from "../Forms/SetDataForm";
+import AddCommentsForm from "../Forms/AddCommentsForm";
+import CommentsBlock from "../Comments/CommentsBlock";
 //import Utils from "../../utiles/utiles";
 
 interface content  {
@@ -23,26 +24,35 @@ type CardInfoProps={
 type CommentsType = {
   text:string,
   commentId:string,
-  user:string
+}
+type CommentsObjectType={
+  [key:string]: {[key:string]:CommentsType}
 }
 
 const CardInfo = ({ content }:CardInfoProps) => {
 
   const [activeCommentCreate, setActiveCommentCreate] = useState(false);
 
-  //const close = () => setActiveCommentCreate(false);
+  const close = () => setActiveCommentCreate(false);
 
-  // const CreateCard = (data:content)=>{
-  //     setData.SetCardData(tableId,data);
-  //     let newData=structuredClone(getData.GetFornmatted("cardsData"));
-  //     newData[tableId][data.cardId] = {...data};
-  //     updateCardState(newData);
-  //   }
+  const [commentsData,setCommentsData] = useState<CommentsObjectType>(()=>{
+    const data = getData.Get("commentsData");
+    if(data) return JSON.parse(data);
+    else return {}
+  })
+
+  useEffect(()=>{
+    setData.Set("commentsData",JSON.stringify(commentsData))
+  },[commentsData])
+
   const CreateComment = (data:CommentsType)=>{
-    setData.SetCommentdata(content.tableId,data)
+    setData.SetCommentdata(content.cardId,data);
+    let newData = structuredClone(getData.GetFornmatted("commentsData"));
+    setCommentsData(newData);
   }
   
-
+  let filteredComments: { [key: string]: CommentsType } = commentsData[content.cardId];
+  
   return (
     <>
       <h1>{content.title}</h1>
@@ -65,19 +75,16 @@ const CardInfo = ({ content }:CardInfoProps) => {
       </div>
 
       <ul className="card__item-comments-block">
-        {/* <CommentsBlock
-          columnIndex={columnIndex}
-          cardIndex={cardIndex}
-          comments={content.comments}
-        /> */}
+        <CommentsBlock
+          comments={filteredComments}
+        />
       </ul>
 
       {activeCommentCreate && (
         <Modal active={activeCommentCreate} setActive={setActiveCommentCreate}>
-          <SetDataForm
-            prev={""}
+          <AddCommentsForm
             close={close}
-            changeData={(e:string) => CreateComment(e)}
+            create={(e:CommentsType) => CreateComment(e)}
             placeholder="Enter your comment:"
           />
         </Modal>

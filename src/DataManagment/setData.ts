@@ -15,7 +15,6 @@ type ValueType = {
 type CommentsType = {
   text:string,
   commentId:string,
-  user:string
 }
 
 const SetCardData = (table: number, value: ValueType) => {
@@ -37,17 +36,17 @@ const SetCardData = (table: number, value: ValueType) => {
   }
 }
 
-const SetCommentdata = (table:number,newComment:CommentsType)=>{
+const SetCommentdata = (table:string,newComment:CommentsType)=>{
   let commentsData = localStorage.getItem("commentsData");
 
   if(commentsData){
     let c:string = commentsData;
-    let copy: {[key:number]: {[key:string]:CommentsType}} = JSON.parse(c);
+    let copy: {[key:string]: {[key:string]:CommentsType}} = JSON.parse(c);
     if(!copy[table]) copy[table] = {};
     copy[table][newComment.commentId]={...copy[table][newComment.commentId],...newComment};
     return localStorage.setItem("commentsData",JSON.stringify(copy));
   } else{
-    let newObject: {[key:number]: {[key:string]:CommentsType}} = {};
+    let newObject: {[key:string]: {[key:string]:CommentsType}} = {};
     newObject[table] = {};
     newObject[table][newComment.commentId] = newComment;
     return localStorage.setItem("commentsData", JSON.stringify(newObject));

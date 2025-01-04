@@ -73,6 +73,9 @@ const CardItem = ({ content,updateCardState }:CardProps) => {
   const HandleDeleteDesc = (e:React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
   };
+
+  let commentsCount:number = getData.GetFornmatted("commentsData")[content.cardId] || 0;
+  let commentsNumber=Object.values(commentsCount).length;
   
   return (
     <li className="card__item" onClick={() => setActiveCard(true)}>
@@ -127,7 +130,7 @@ const CardItem = ({ content,updateCardState }:CardProps) => {
         >
           Delete
         </button>
-        <div>Count of coments: 0</div>
+        <div>Count of coments: {commentsNumber}</div>
       </div>
       {activeCard && (
         <Modal setActive={setActiveCard} active={activeCard}>
