@@ -10,12 +10,10 @@ import CommentsBlock from "../Comments/CommentsBlock";
 
 import { CardType, CommentsObjectType, CommentsType } from "../../types/types";
 
-
 type CardInfoProps={
   content:CardType,
   close:()=>void
 }
-
 
 const CardInfo = ({ content }:CardInfoProps) => {
 

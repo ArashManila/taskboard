@@ -1,12 +1,11 @@
 import { useState } from "react";
 
 import Modal from "../Modal/Modal";
-//import SetData from "../Forms/SetDataForm";
+import SetDataForm from "../Forms/SetDataForm";
+import getData from "../../DataManagment/getData";
 
 import deletion from "../../icons/delete.png";
 import edit from "../../icons/edit.png";
-import getData from "../../DataManagment/getData";
-import SetDataForm from "../Forms/SetDataForm";
 
 import { CommentsObjectType, CommentsType } from "../../types/types";
 

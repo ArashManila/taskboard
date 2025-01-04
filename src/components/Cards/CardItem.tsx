@@ -9,6 +9,7 @@ import deletion from "../../icons/delete.png";
 import getData from "../../DataManagment/getData";
 import SetDataForm from "../Forms/SetDataForm";
 import CardInfo from "./CardInfo";
+
 import { CardsData, CardType } from "../../types/types";
 
 
