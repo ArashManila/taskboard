@@ -1,40 +1,42 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 
 import Modal from "../Modal/Modal";
-import SetData from "../Forms/SetDataForm";
+//import SetData from "../Forms/SetDataForm";
 
 import deletion from "../../icons/delete.png";
 import edit from "../../icons/edit.png";
+import getData from "../../DataManagment/getData";
+import SetDataForm from "../Forms/SetDataForm";
 
 type CommentsType = {
   text:string,
   commentId:string,
 }
-
+type CommentsObjectType={
+  [key:string]: {[key:string]:CommentsType}
+}
 type CommentBlockProps={
-  comments: {[key: string]: CommentsType}
+  comments: {[key: string]: CommentsType},
+  updateCommentsState:(arg:CommentsObjectType)=>void,
+  card:string
 }
 
-const CommentsBlock = ({ comments }:CommentBlockProps) => {
+const CommentsBlock = ({ comments,updateCommentsState,card }:CommentBlockProps) => {
 
   const [activeCommentEdit, setActiveCommentEdit] = useState(false);
-  
 
 
-  // const RemoveComment = (comment, ind1, ind2) => {
-  //   let newList = structuredClone(lists);
-  //   let newComment = newList[ind1].items[ind2].comments.filter(
-  //     (i) => i.id !== comment.id
-  //   );
-  //   newList[ind1].items[ind2].comments = newComment;
-  //   setLists(newList);
-  // };
+  const RemoveComment = (comment_id:string)=>{
+    let newData=structuredClone(getData.GetFornmatted("commentsData"));
+    delete newData[card][comment_id];
+    updateCommentsState(newData);
+  }
 
-  // const EditComment = (e, ind1, ind2, ind3) => {
-  //   let newList = structuredClone(lists);
-  //   newList[ind1].items[ind2].comments[ind3].body = e;
-  //   setLists(newList);
-  // };
+  const EditComment = (e:string,comment_id:string) => {
+    let newData=structuredClone(getData.GetFornmatted("commentsData"));
+    newData[card][comment_id].text = e;
+    updateCommentsState(newData);
+  };
 
   const Handle = (e:React.MouseEvent<HTMLImageElement>) => {
     e.stopPropagation();
@@ -56,7 +58,7 @@ const CommentsBlock = ({ comments }:CommentBlockProps) => {
                 <img
                   src={deletion}
                   alt=""
-                  //onClick={() => RemoveComment(o, columnIndex, cardIndex)}
+                  onClick={()=>RemoveComment(value.commentId)}
                 />
                 <img src={edit} alt="" onClick={Handle} />
               </div>
@@ -67,14 +69,14 @@ const CommentsBlock = ({ comments }:CommentBlockProps) => {
                 active={activeCommentEdit}
                 setActive={setActiveCommentEdit}
               >
-                {/* <SetData
-                  prev={o.body}
+                <SetDataForm
+                  prev={value.text}
                   close={close}
-                  changeData={(e) =>
-                    EditComment(e, columnIndex, cardIndex, ind)
+                  changeData={(e:string) =>
+                    EditComment(e, value.commentId)
                   }
                   placeholder="Enter your comment:"
-                /> */}
+                />
               </Modal>
             )}
           </li>

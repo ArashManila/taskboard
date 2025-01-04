@@ -77,6 +77,8 @@ const CardInfo = ({ content }:CardInfoProps) => {
       <ul className="card__item-comments-block">
         <CommentsBlock
           comments={filteredComments}
+          updateCommentsState={setCommentsData}
+          card={content.cardId}
         />
       </ul>
 
