@@ -8,25 +8,14 @@ import setData from "../../DataManagment/setData";
 import AddCommentsForm from "../Forms/AddCommentsForm";
 import CommentsBlock from "../Comments/CommentsBlock";
 
-interface content  {
-  title:string,
-  desc:string,
-  tableId:number,
-  cardId:string
-}
+import { CardType, CommentsObjectType, CommentsType } from "../../types/types";
+
 
 type CardInfoProps={
-  content:content
+  content:CardType,
+  close:()=>void
 }
 
-type CommentsType = {
-  text:string,
-  commentId:string,
-  user:string
-}
-type CommentsObjectType={
-  [key:string]: {[key:string]:CommentsType}
-}
 
 const CardInfo = ({ content }:CardInfoProps) => {
 

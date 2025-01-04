@@ -10,20 +10,10 @@ import AddCard from '../Cards/AddCard';
 import CardItem from "../Cards/CardItem";
 import setData from "../../DataManagment/setData";
 
-interface content  {
-  title:string,
-  desc:string,
-  tableId:number,
-  cardId:string
-}
+import { CardsData, CardType } from "../../types/types";
 
-interface CardsData{
-  [tableId:number]:{
-    [cardId:string]:content
-  }
-}
 interface cardContent {
-  [key: string]: content;
+  [key: string]: CardType;
 }
 
 type TableProps={

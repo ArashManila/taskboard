@@ -1,12 +1,10 @@
 import { useState } from "react";
+
 import utiles from "../../utiles/utiles";
 import getData from "../../DataManagment/getData";
 
-type CommentsType = {
-  text:string,
-  commentId:string,
-  user:string
-}
+import { CommentsType } from "../../types/types";
+
 
 type AddCommentFormProps={
     close:()=>void,

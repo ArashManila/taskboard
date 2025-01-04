@@ -1,3 +1,4 @@
+import { CardType, CommentsType } from "../types/types";
 import getData from "./getData";
 
 const Set = (key:string,content:string)=>{
@@ -7,32 +8,20 @@ const Set = (key:string,content:string)=>{
 const SetTableData = (arg:number,newVal:string)=>{
   return localStorage.setItem("Tablesdata",JSON.parse(localStorage.Tablesdata)[arg].name=newVal);
 }
-type ValueType = {
-  title: string;
-  desc: string;
-  cardId: string; 
-  tableId: number;
-}
 
-type CommentsType = {
-  text:string,
-  commentId:string,
-  user:string
-}
-
-const SetCardData = (table: number, value: ValueType) => {
+const SetCardData = (table: number, value: CardType) => {
   let cardData = localStorage.getItem("cardsData");
   
   if (cardData) {
       let c: string = cardData;
-      let copy: { [key: number]: { [key: string]: ValueType } } = JSON.parse(c);
+      let copy: { [key: number]: { [key: string]: CardType } } = JSON.parse(c);
       if (!copy[table]) {
           copy[table] = {};
       }
       copy[table][value.cardId] = { ...copy[table][value.cardId], ...value };
       return localStorage.setItem("cardsData", JSON.stringify(copy));
   } else {
-      let newObject: { [key: number]: { [key: string]: ValueType } } = {};
+      let newObject: { [key: number]: { [key: string]: CardType } } = {};
       newObject[table] = {};
       newObject[table][value.cardId] = value;
       return localStorage.setItem("cardsData", JSON.stringify(newObject));

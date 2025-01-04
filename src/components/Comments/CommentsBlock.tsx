@@ -8,14 +8,8 @@ import edit from "../../icons/edit.png";
 import getData from "../../DataManagment/getData";
 import SetDataForm from "../Forms/SetDataForm";
 
-type CommentsType = {
-  text:string,
-  commentId:string,
-  user:string
-}
-type CommentsObjectType={
-  [key:string]: {[key:string]:CommentsType}
-}
+import { CommentsObjectType, CommentsType } from "../../types/types";
+
 type CommentBlockProps={
   comments: {[key: string]: CommentsType},
   updateCommentsState:(arg:CommentsObjectType)=>void,

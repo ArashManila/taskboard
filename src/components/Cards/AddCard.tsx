@@ -5,17 +5,7 @@ import AddCardForm from "../Forms/AddCardForm";
 import getData from "../../DataManagment/getData";
 import setData from "../../DataManagment/setData";
 
-interface content  {
-  title:string,
-  desc:string,
-  tableId:number,
-  cardId:string
-}
-interface CardsData{
-  [tableId:number]:{
-    [cardId:string]:content
-  }
-}
+import { CardsData, CardType } from "../../types/types";
 
 type AddCardProps ={
   tableId:number,
@@ -26,11 +16,10 @@ const AddCard = ({tableId,updateCardState}:AddCardProps) => {
   
   
   const [active, setActive] = useState(false);
-  //const [CardState,setCardState] =useState({});
 
   const CloseModal = () => setActive(false);
 
-  const CreateCard = (data:content)=>{
+  const CreateCard = (data:CardType)=>{
     setData.SetCardData(tableId,data);
     let newData=structuredClone(getData.GetFornmatted("cardsData"));
     newData[tableId][data.cardId] = {...data};

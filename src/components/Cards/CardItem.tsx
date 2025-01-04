@@ -5,23 +5,15 @@ import Modal from "../Modal/Modal";
 import edit from "../../icons/edit.png";
 import addition from "../../icons/add.png";
 import deletion from "../../icons/delete.png";
+
 import getData from "../../DataManagment/getData";
 import SetDataForm from "../Forms/SetDataForm";
 import CardInfo from "./CardInfo";
+import { CardsData, CardType } from "../../types/types";
 
-interface content  {
-  title:string,
-  desc:string,
-  tableId:number,
-  cardId:string
-}
-interface CardsData{
-  [tableId:number]:{
-    [cardId:string]:content
-  }
-}
+
 type CardProps={
-  content:content,
+  content:CardType,
   updateCardState:React.Dispatch<React.SetStateAction<CardsData>>
 }
 
@@ -41,6 +33,9 @@ const CardItem = ({ content,updateCardState }:CardProps) => {
   const closeDescCreate = () => {
     setActiveDescCreate(false);
   };
+  const closeCardInfo=()=>{
+    setActiveCard(false)
+  }
 
   const RemoveCard = (card_id:string)=>{
     let newData=structuredClone(getData.GetFornmatted("cardsData"));
@@ -136,6 +131,7 @@ const CardItem = ({ content,updateCardState }:CardProps) => {
         <Modal setActive={setActiveCard} active={activeCard}>
           <CardInfo
             content={content}
+            close={closeCardInfo}
           />
         </Modal>
       )}

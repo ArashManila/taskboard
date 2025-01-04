@@ -1,16 +1,12 @@
 import { useState } from "react";
+
 import utiles from "../../utiles/utiles";
 
-interface content  {
-    title:string,
-    desc:string,
-    tableId:number,
-    cardId:string
-  }
+import { CardType } from "../../types/types";
 
 type AddCardFormProps={
     close:()=>void,
-    create: (arg:content)=>void,
+    create: (arg:CardType)=>void,
     tid:number
 }
 
