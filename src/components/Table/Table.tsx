@@ -10,7 +10,7 @@ import AddCard from '../Cards/AddCard';
 import CardItem from "../Cards/CardItem";
 import setData from "../../DataManagment/setData";
 
-import { CardsData, CardType } from "../../types/types";
+import { CardsData, CardType, TableNamesData } from "../../types/types";
 
 interface cardContent {
   [key: string]: CardType;
@@ -19,17 +19,18 @@ interface cardContent {
 type TableProps={
   tableId:number,
   rename:(arg:Object)=>void
+  table:TableNamesData
 }
 
-const Table = ({rename,tableId}:TableProps)=>{
+const Table = ({rename,tableId,table}:TableProps)=>{
   
-  const [tableName,setTableName] = useState<string>(getData.GetTableData(tableId)) ;
+  const [tableName,setTableName] = useState<string>(table[tableId].name) ;
   const [active,setActive] = useState<boolean>(false);
 
   const close=()=>setActive(false);
 
   const NewName=(e:string)=>{
-    let newData = structuredClone(getData.GetFornmatted('Tablesdata'));
+    let newData = structuredClone(table);
     newData[tableId].name = e;
     setTableName(e.toString());
     rename(newData);

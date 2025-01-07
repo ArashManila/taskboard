@@ -17,6 +17,13 @@ export interface CardsData{
   }
 }
 
+export interface TableNamesData{
+  [key:number]:{
+    id:number,
+    name:string
+  }
+}
+
 export interface CommentsObjectType{
   [key:string]: {[key:string]:CommentsType}
 }
