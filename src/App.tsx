@@ -9,14 +9,12 @@ import Main from "./components/Main";
 
 
 function App() {
-  const [userName,setUserName] = useState<string>('');
+  
   const [isActive,setIsActive] = useState<boolean>(false);
   
     useEffect(()=>{
       if(!data.Get('User name')){
         setIsActive(true);
-        console.log(data.Get('User name'));
-        
       }
     },[])
 
@@ -24,7 +22,7 @@ function App() {
   return (
     <>
       {isActive && <Modal active={isActive} setActive ={setIsActive} >
-        <AuthForm setActive ={setIsActive} name={userName} setName={setUserName}/>
+        <AuthForm setActive ={setIsActive}/>
       </Modal>}
       <Header/>
       <Main />

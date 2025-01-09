@@ -1,11 +1,11 @@
+import { useState } from "react";
 import data from "../../DataManagment/Data";
 
 type AuthProps = {
-    name:string,
     setActive:(active:boolean)=> void,
-    setName:(e:string)=>void
 }
-const AuthForm = ({name,setActive,setName}:AuthProps)=>{
+const AuthForm = ({setActive}:AuthProps)=>{
+    const [name,setName] = useState<string>('');
     function SaveUserName(e:React.MouseEvent<HTMLButtonElement>){
         e.preventDefault();
         if(!name){
