@@ -1,9 +1,9 @@
 import { useState } from "react";
 
 import utiles from "../../utiles/utiles";
-import getData from "../../DataManagment/getData";
 
 import { CommentsType } from "../../types/types";
+import data from "../../DataManagment/Data";
 
 
 type AddCommentFormProps={
@@ -15,7 +15,7 @@ type AddCommentFormProps={
 const AddCommentsForm = ({create,close,placeholder}:AddCommentFormProps)=>{
 
     const id = utiles.makeid(4);
-    let userName:string=getData.Get("User name") || "defult name";
+    let userName:string=data.Get("User name") || "defult name";
     const [comment,setComment] = useState({
         text:'',
         commentId:id,

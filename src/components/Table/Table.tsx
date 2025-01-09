@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react";
 
-import getData from "../../DataManagment/getData";
-
 import Edit from '../../icons/edit.png'
 
 import Modal from "../Modal/Modal";
 import SetDataForm from "../Forms/SetDataForm";
 import AddCard from '../Cards/AddCard';
 import CardItem from "../Cards/CardItem";
-import setData from "../../DataManagment/setData";
 
 import { CardsData, CardType, TableNamesData } from "../../types/types";
+
+import data from "../../DataManagment/Data";
 
 interface cardContent {
   [key: string]: CardType;
@@ -37,13 +36,13 @@ const Table = ({rename,tableId,table}:TableProps)=>{
   }
 
   const [cardsData,setCardsData] = useState<CardsData>(()=>{
-      const data = getData.Get("cardsData");
-      if(data) return JSON.parse(data);
+      const newData = data.Get("cardsData");
+      if(newData) return JSON.parse(newData);
       else return {};
     });
     
     useEffect(() => {
-      setData.Set("cardsData",JSON.stringify(cardsData))
+      data.Set("cardsData",JSON.stringify(cardsData))
     }, [cardsData]);
 
     let filteredCards:cardContent = cardsData[tableId] || {};

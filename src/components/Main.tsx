@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import getData from "../DataManagment/getData";
-import setData from "../DataManagment/setData";
 import Table from "./Table/Table";
+import data from "../DataManagment/Data";
 
 
 const Main = () => {
@@ -21,16 +20,16 @@ const Main = () => {
   
 
   const [TableNames,setTableNames] = useState(()=>{
-    const data = getData.Get("Tablesdata");
-    return data
-      ? JSON.parse(data)
+    const newData = data.Get("Tablesdata");
+    return newData
+      ? JSON.parse(newData)
       : Object.fromEntries(tableNameMap.entries())
   });
 
   
   
   useEffect(() => {
-    setData.Set("Tablesdata",JSON.stringify(TableNames))
+    data.Set("Tablesdata",JSON.stringify(TableNames))
   }, [TableNames]);
 
   

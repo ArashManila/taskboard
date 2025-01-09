@@ -2,12 +2,12 @@ import { useState } from "react";
 
 import Modal from "../Modal/Modal";
 import SetDataForm from "../Forms/SetDataForm";
-import getData from "../../DataManagment/getData";
 
 import deletion from "../../icons/delete.png";
 import edit from "../../icons/edit.png";
 
 import { CommentsObjectType, CommentsType } from "../../types/types";
+import data from "../../DataManagment/Data";
 
 type CommentBlockProps={
   comments: {[key: string]: CommentsType},
@@ -21,13 +21,13 @@ const CommentsBlock = ({ comments,updateCommentsState,card }:CommentBlockProps) 
 
 
   const RemoveComment = (comment_id:string)=>{
-    let newData=structuredClone(getData.GetFornmatted("commentsData"));
+    let newData=structuredClone(data.GetFornmatted("commentsData"));
     delete newData[card][comment_id];
     updateCommentsState(newData);
   }
 
   const EditComment = (e:string,comment_id:string) => {
-    let newData=structuredClone(getData.GetFornmatted("commentsData"));
+    let newData=structuredClone(data.GetFornmatted("commentsData"));
     newData[card][comment_id].text = e;
     updateCommentsState(newData);
   };

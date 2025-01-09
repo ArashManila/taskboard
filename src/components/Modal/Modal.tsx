@@ -1,5 +1,6 @@
 import { ReactNode, useCallback, useEffect } from "react";
-import getData from "../../DataManagment/getData";
+import data from "../../DataManagment/Data";
+
 
 type ModalProps = {
   active:boolean,
@@ -11,7 +12,7 @@ const Modal=({active,setActive,children}:ModalProps)=>{
     
     const escFunction = useCallback((event:KeyboardEvent) => {
       event.stopPropagation();
-        if (event.key === "Escape" && getData.Get('User name')) setActive(false);
+        if (event.key === "Escape" && data.Get('User name')) setActive(false);
     }, []);
     
     useEffect(() => {
@@ -23,7 +24,7 @@ const Modal=({active,setActive,children}:ModalProps)=>{
     }, [escFunction]);
     
     const CloseFunction = ()=>{
-      if(getData.Get('User name')) setActive(false); 
+      if(data.Get('User name')) setActive(false); 
     }
         
     return(

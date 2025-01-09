@@ -1,5 +1,21 @@
 import { CardType, CommentsType } from "../types/types";
-import getData from "./getData";
+
+
+const Get = (key:string)=>{
+  let content = localStorage.getItem(key);
+  return content;
+}
+
+const GetFornmatted= (arg:string)=>{
+  let parsedContent = localStorage.getItem(arg) || "{}";
+
+  return JSON.parse(parsedContent);
+}
+
+const GetTableData = (arg:number)=>{
+  if(localStorage.Tablesdata) return JSON.parse(localStorage.Tablesdata)[arg].name ;
+  else return '';
+}
 
 const Set = (key:string,content:string)=>{
   let result = localStorage.setItem(key,content);
@@ -30,7 +46,7 @@ const SetCardData = (table: number, value: CardType) => {
 
 const SetCommentdata = (table:string,newComment:CommentsType)=>{
   let commentsData = localStorage.getItem("commentsData");
-  let userName = getData.Get("User name") || 'default name';
+  let userName = Get("User name") || 'default name';
 
   if(commentsData){
     let c:string = commentsData;
@@ -47,5 +63,4 @@ const SetCommentdata = (table:string,newComment:CommentsType)=>{
   }
 }
 
-
-export default {Set,SetTableData,SetCardData,SetCommentdata};
+export default {Set,SetTableData,SetCardData,SetCommentdata,Get,GetFornmatted,GetTableData};

@@ -2,10 +2,9 @@ import { useState } from "react";
 
 import Modal from "../Modal/Modal";
 import AddCardForm from "../Forms/AddCardForm";
-import getData from "../../DataManagment/getData";
-import setData from "../../DataManagment/setData";
 
 import { CardsData, CardType } from "../../types/types";
+import data from "../../DataManagment/Data";
 
 type AddCardProps ={
   tableId:number,
@@ -19,10 +18,10 @@ const AddCard = ({tableId,updateCardState}:AddCardProps) => {
 
   const CloseModal = () => setActive(false);
 
-  const CreateCard = (data:CardType)=>{
-    setData.SetCardData(tableId,data);
-    let newData=structuredClone(getData.GetFornmatted("cardsData"));
-    newData[tableId][data.cardId] = {...data};
+  const CreateCard = (dataInfo:CardType)=>{
+    data.SetCardData(tableId,dataInfo);
+    let newData=structuredClone(data.GetFornmatted("cardsData"));
+    newData[tableId][dataInfo.cardId] = {...dataInfo};
     updateCardState(newData);
   }
 

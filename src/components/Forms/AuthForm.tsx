@@ -1,5 +1,4 @@
-import setData from "../../DataManagment/setData";
-
+import data from "../../DataManagment/Data";
 
 type AuthProps = {
     name:string,
@@ -13,7 +12,7 @@ const AuthForm = ({name,setActive,setName}:AuthProps)=>{
             return;
         }
         else{
-            setData.Set('User name',name);
+            data.Set('User name',name);
             setActive(false);
         }
         

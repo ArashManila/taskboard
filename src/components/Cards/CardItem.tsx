@@ -6,11 +6,11 @@ import edit from "../../icons/edit.png";
 import addition from "../../icons/add.png";
 import deletion from "../../icons/delete.png";
 
-import getData from "../../DataManagment/getData";
 import SetDataForm from "../Forms/SetDataForm";
 import CardInfo from "./CardInfo";
 
 import { CardsData, CardType } from "../../types/types";
+import data from "../../DataManagment/Data";
 
 
 type CardProps={
@@ -39,24 +39,24 @@ const CardItem = ({ content,updateCardState }:CardProps) => {
   }
 
   const RemoveCard = (card_id:string)=>{
-    let newData=structuredClone(getData.GetFornmatted("cardsData"));
+    let newData=structuredClone(data.GetFornmatted("cardsData"));
     delete newData[content.tableId][card_id];
     updateCardState(newData);
   }
 
   const RemoveCardDesc = (table_id:number,card_id:string)=>{
-    let newData=structuredClone(getData.GetFornmatted("cardsData"));
+    let newData=structuredClone(data.GetFornmatted("cardsData"));
     newData[table_id][card_id].desc = "";
     updateCardState(newData);
   }
 
   const setCardDesc = (newDesc:string)=>{
-    let newData=structuredClone(getData.GetFornmatted("cardsData"));
+    let newData=structuredClone(data.GetFornmatted("cardsData"));
     newData[content.tableId][content.cardId].desc=newDesc;
     updateCardState(newData);
   }
   const ChangeCardTitle = (newTitle:string)=>{
-    let newData=structuredClone(getData.GetFornmatted("cardsData"));
+    let newData=structuredClone(data.GetFornmatted("cardsData"));
     newData[content.tableId][content.cardId].title=newTitle;
     updateCardState(newData);
   }
@@ -70,7 +70,7 @@ const CardItem = ({ content,updateCardState }:CardProps) => {
     e.stopPropagation();
   };
 
-  let commentsCount:number = getData.GetFornmatted("commentsData")[content.cardId] || 0;
+  let commentsCount:number = data.GetFornmatted("commentsData")[content.cardId] || 0;
   let commentsNumber=Object.values(commentsCount).length;
   
   return (

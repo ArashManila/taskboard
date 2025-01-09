@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import getData from "./DataManagment/getData";
+import data from './DataManagment/Data'
 
 import Modal from "./components/Modal/Modal";
 import AuthForm from "./components/Forms/AuthForm";
@@ -13,9 +13,9 @@ function App() {
   const [isActive,setIsActive] = useState<boolean>(false);
   
     useEffect(()=>{
-      if(!getData.Get('User name')){
+      if(!data.Get('User name')){
         setIsActive(true);
-        console.log(getData.Get('User name'));
+        console.log(data.Get('User name'));
         
       }
     },[])
