@@ -17,7 +17,7 @@ export interface CardsData{
   }
 }
 
-export interface TableNamesData{
+export interface TableData{
   [key:number]:{
     id:number,
     name:string

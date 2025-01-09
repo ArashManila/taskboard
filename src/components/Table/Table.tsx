@@ -7,7 +7,7 @@ import SetDataForm from "../Forms/SetDataForm";
 import AddCard from '../Cards/AddCard';
 import CardItem from "../Cards/CardItem";
 
-import { CardsData, CardType, TableNamesData } from "../../types/types";
+import { CardsData, CardType, TableData } from "../../types/types";
 
 import data from "../../DataManagment/Data";
 
@@ -18,7 +18,7 @@ interface cardContent {
 type TableProps={
   tableId:number,
   rename:(arg:Object)=>void
-  table:TableNamesData
+  table:TableData
 }
 
 const Table = ({rename,tableId,table}:TableProps)=>{

@@ -43,7 +43,7 @@ const CardInfo = ({ content }:CardInfoProps) => {
     <>
       <h1>{content.title}</h1>
       <div>{content.desc}</div>
-      {/* <div>Column: {data.GetFornmatted('Tablesdata')[content.tableId].name}</div> */}
+      <div>Column: {data.GetFornmatted('Tablesdata')[content.tableId].name}</div>
       <div>User name: {data.Get('User name')}</div>
 
       <div className="card__item-comments-title-wrapper">
