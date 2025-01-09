@@ -16,7 +16,7 @@ const AddCommentsForm = ({create,close,placeholder}:AddCommentFormProps)=>{
 
     const id = utiles.makeid(4);
     let userName:string=data.Get("User name") || "defult name";
-    const [comment,setComment] = useState({
+    const [comment,setComment] = useState<CommentsType>({
         text:'',
         commentId:id,
         user:userName

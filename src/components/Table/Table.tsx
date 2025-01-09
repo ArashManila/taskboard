@@ -7,7 +7,7 @@ import SetDataForm from "../Forms/SetDataForm";
 import AddCard from '../Cards/AddCard';
 import CardItem from "../Cards/CardItem";
 
-import { CardsData, CardType, TableData, TablesData } from "../../types/types";
+import { CardsData, CardType, TableData } from "../../types/types";
 
 import data from "../../DataManagment/Data";
 
@@ -28,7 +28,7 @@ const Table = ({updateTableData,tableId,table}:TableProps)=>{
 
   const close=()=>setActive(false);
 
-  const NewName=(e:string)=>{
+  const setNewTableName=(e:string)=>{
     let newData:TableData = structuredClone(table);
     newData.name = e;
     setTableName(e.toString());
@@ -45,7 +45,11 @@ const Table = ({updateTableData,tableId,table}:TableProps)=>{
       data.Set("cardsData",JSON.stringify(cardsData))
     }, [cardsData]);
 
-  let filteredCards:cardContent = cardsData[tableId] || {};
+  const updateCardData = (data:CardType)=>{
+    
+  }
+
+  let filteredCards:cardContent = cardsData[table.id] || {};
     
   return(
     <li className="board-item" >
@@ -54,7 +58,7 @@ const Table = ({updateTableData,tableId,table}:TableProps)=>{
         <div>
           <img src={Edit} alt="edit" onClick={()=>setActive(true)}/>
           {active && <Modal active={active} setActive={setActive}>
-            <SetDataForm changeData={(e)=>NewName(e)} placeholder="Enter new title" prev={tableName} close={close}/>
+            <SetDataForm changeData={(e)=>setNewTableName(e)} placeholder="Enter new title" prev={tableName} close={close}/>
           </Modal>}
         </div>
       </div>
