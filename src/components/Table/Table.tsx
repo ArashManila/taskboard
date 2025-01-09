@@ -17,7 +17,7 @@ interface cardContent {
 
 type TableProps={
   tableId:number,
-  rename:(arg:Object)=>void
+  rename:(arg:TableData)=>void
   table:TableData
 }
 
@@ -29,7 +29,7 @@ const Table = ({rename,tableId,table}:TableProps)=>{
   const close=()=>setActive(false);
 
   const NewName=(e:string)=>{
-    let newData = structuredClone(table);
+    let newData:TableData = structuredClone(table);
     newData[tableId].name = e;
     setTableName(e.toString());
     rename(newData);

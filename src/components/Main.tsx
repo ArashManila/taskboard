@@ -1,36 +1,30 @@
 import { useEffect, useState } from "react";
 import Table from "./Table/Table";
 import data from "../DataManagment/Data";
+import { TableData } from "../types/types";
 
 
 const Main = () => {
-  let tableNameMap = new Map();
-  tableNameMap.set(
-    0,{id:0,name:"To-Do"}
-  )
-  tableNameMap.set(
-    1,{id:1,name:"In progress"}
-  )
-  tableNameMap.set(
-    2,{id:2,name:"Testing"}
-  )
-  tableNameMap.set(
-    3,{id:3,name:"Done"}
-  )
+  const tableNameData = {
+    0:{id:0,name:"To-Do"},
+    1:{id:1,name:"In progress"},
+    2:{id:2,name:"Testing"},
+    3:{id:3,name:"Done"}
+  }
   
 
-  const [TableNames,setTableNames] = useState(()=>{
+  const [tablesData,setTablesData] = useState<TableData>(()=>{
     const newData = data.Get("Tablesdata");
     return newData
       ? JSON.parse(newData)
-      : Object.fromEntries(tableNameMap.entries())
+      : tableNameData
   });
 
   
   
   useEffect(() => {
-    data.Set("Tablesdata",JSON.stringify(TableNames))
-  }, [TableNames]);
+    data.Set("Tablesdata",JSON.stringify(tablesData))
+  }, [tablesData]);
 
   
   
@@ -38,10 +32,10 @@ const Main = () => {
     <main className="content container">
       <div className="board">
         <ul className="board__list">
-          {TableNames && <Table table={TableNames} tableId={0} rename={setTableNames}/>}
-          {TableNames && <Table table={TableNames} tableId={1} rename={setTableNames}/>}
-          {TableNames && <Table table={TableNames} tableId={2} rename={setTableNames}/>}
-          {TableNames && <Table table={TableNames} tableId={3} rename={setTableNames}/>}
+          {tablesData && <Table table={tablesData} tableId={0} rename={setTablesData}/>}
+          {tablesData && <Table table={tablesData} tableId={1} rename={setTablesData}/>}
+          {tablesData && <Table table={tablesData} tableId={2} rename={setTablesData}/>}
+          {tablesData && <Table table={tablesData} tableId={3} rename={setTablesData}/>}
         </ul>
       </div>
     </main>
