@@ -31,7 +31,7 @@ const Table = ({updateTableData,tableId,table}:TableProps)=>{
   const setNewTableName=(e:string)=>{
     let newData:TableData = structuredClone(table);
     newData.name = e;
-    setTableName(e.toString());
+    setTableName(e);
     updateTableData(newData);
   }
 
@@ -46,11 +46,31 @@ const Table = ({updateTableData,tableId,table}:TableProps)=>{
     }, [cardsData]);
 
   const updateCardData = (data:CardType)=>{
-    
+    setCardsData((cards:CardsData)=>{
+      let newCardsData = structuredClone(cards);
+      newCardsData[data.tableId][data.cardId]=data;
+      return newCardsData;
+    })
   }
 
+  const removeCard = (tableId: number, cardId: string) => {
+    setCardsData((prevCardsData: CardsData) => {
+      const newCardsData = structuredClone(prevCardsData);
+  
+      if (newCardsData[tableId]) {
+        delete newCardsData[tableId][cardId];
+      }
+      data.Set("cardsData", JSON.stringify(newCardsData));
+      return newCardsData;
+    });
+  };
+  
+  
+
+
+
   let filteredCards:cardContent = cardsData[table.id] || {};
-    
+  
   return(
     <li className="board-item" >
       <div className="board__title-wrapper">
@@ -65,7 +85,7 @@ const Table = ({updateTableData,tableId,table}:TableProps)=>{
       <AddCard updateCardState={setCardsData} tableId={tableId}/>
       <ul className="card__list">
       {Object.entries(filteredCards).map(([key, value]) => (
-          <CardItem updateCardState={setCardsData} content={value} key={key} />
+          <CardItem removeCard={removeCard} updateCardState={updateCardData} cardContent={value} key={key} />
         ))} 
       </ul>
     </li>

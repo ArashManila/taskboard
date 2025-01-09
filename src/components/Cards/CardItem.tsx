@@ -9,16 +9,17 @@ import deletion from "../../icons/delete.png";
 import SetDataForm from "../Forms/SetDataForm";
 import CardInfo from "./CardInfo";
 
-import { CardsData, CardType } from "../../types/types";
+import { CardType } from "../../types/types";
 import data from "../../DataManagment/Data";
 
 
 type CardProps={
-  content:CardType,
-  updateCardState:React.Dispatch<React.SetStateAction<CardsData>>
+  cardContent:CardType,
+  updateCardState:(arg:CardType)=>void,
+  removeCard:(arg1:number,arg2:string)=>void,
 }
 
-const CardItem = ({ content,updateCardState }:CardProps) => {
+const CardItem = ({removeCard, cardContent,updateCardState }:CardProps) => {
   const [activeCard, setActiveCard] = useState(false);
   const [activeTitleEdit, setActiveTitleEdit] = useState(false);
   const [activeDescEdit, setActiveDescEdit] = useState(false);
@@ -38,26 +39,26 @@ const CardItem = ({ content,updateCardState }:CardProps) => {
     setActiveCard(false)
   }
 
-  const RemoveCard = (card_id:string)=>{
-    let newData=structuredClone(data.GetFornmatted("cardsData"));
-    delete newData[content.tableId][card_id];
-    updateCardState(newData);
-  }
+  // const RemoveCard = (card_id:string)=>{
+  //   let newData=structuredClone(cardContent);
+  //   delete newData;
+  //   updateCardState(newData);
+  // }
 
-  const RemoveCardDesc = (table_id:number,card_id:string)=>{
-    let newData=structuredClone(data.GetFornmatted("cardsData"));
-    newData[table_id][card_id].desc = "";
+  const RemoveCardDesc = ()=>{
+    let newData=structuredClone(cardContent);
+    newData["desc"]='';
     updateCardState(newData);
   }
 
   const setCardDesc = (newDesc:string)=>{
-    let newData=structuredClone(data.GetFornmatted("cardsData"));
-    newData[content.tableId][content.cardId].desc=newDesc;
+    let newData=structuredClone(cardContent);
+    newData["desc"]=newDesc;
     updateCardState(newData);
   }
   const ChangeCardTitle = (newTitle:string)=>{
-    let newData=structuredClone(data.GetFornmatted("cardsData"));
-    newData[content.tableId][content.cardId].title=newTitle;
+    let newData=structuredClone(cardContent);
+    newData["title"]=newTitle;
     updateCardState(newData);
   }
 
@@ -70,14 +71,14 @@ const CardItem = ({ content,updateCardState }:CardProps) => {
     e.stopPropagation();
   };
 
-  let commentsCount:number = data.GetFornmatted("commentsData")[content.cardId] || 0;
-  let commentsNumber=Object.values(commentsCount).length;
+  let commentsCount:number = data.GetFornmatted("commentsData")[cardContent.cardId] || 0;
+  let commentsNumber:number=Object.values(commentsCount).length;
   
   return (
     <li className="card__item" onClick={() => setActiveCard(true)}>
       <div className="card__item-title-wrapper">
         <h3 className="card__item-title">
-          <p>{content.title}</p>
+          <p>{cardContent.title}</p>
         </h3>
         <div className="card__item-title-link" onClick={HandlePopUp}>
           <img src={edit} alt="Edit" />
@@ -85,14 +86,14 @@ const CardItem = ({ content,updateCardState }:CardProps) => {
       </div>
 
       <div className="card__item-desc">
-        <div>{content.desc}</div>
+        <div>{cardContent.desc}</div>
 
         <div className="card__item-desc-options">
-          {content.desc ? (
+          {cardContent.desc ? (
             <>
               <div onClick={HandleDeleteDesc}>
                 <img
-                  onClick={() => RemoveCardDesc(content.tableId, content.cardId)}
+                  onClick={RemoveCardDesc}
                   src={deletion}
                   alt=""
                 />
@@ -122,7 +123,7 @@ const CardItem = ({ content,updateCardState }:CardProps) => {
         <button
           className="card__item-footer-button button button-pink"
           type="button"
-          onClick={() => RemoveCard(content.cardId)}
+          onClick={() => removeCard(cardContent.tableId,cardContent.cardId)}
         >
           Delete
         </button>
@@ -131,7 +132,7 @@ const CardItem = ({ content,updateCardState }:CardProps) => {
       {activeCard && (
         <Modal setActive={setActiveCard} active={activeCard}>
           <CardInfo
-            content={content}
+            content={cardContent}
             close={closeCardInfo}
           />
         </Modal>
@@ -139,7 +140,7 @@ const CardItem = ({ content,updateCardState }:CardProps) => {
       {activeTitleEdit && (
         <Modal setActive={setActiveTitleEdit} active={activeTitleEdit}>
           <SetDataForm
-            prev={content.title}
+            prev={cardContent.title}
             close={closeTitle}
             changeData={(e:string) => ChangeCardTitle(e)}
             placeholder={"Enter new card title:"}
@@ -150,7 +151,7 @@ const CardItem = ({ content,updateCardState }:CardProps) => {
         <Modal setActive={setActiveDescEdit} active={activeDescEdit}>
           <SetDataForm
             close={closeDescEdit}
-            prev={content.desc}
+            prev={cardContent.desc}
             changeData={(e:string) => setCardDesc(e)}
             placeholder={"Enter new card description:"}
           />
@@ -159,7 +160,7 @@ const CardItem = ({ content,updateCardState }:CardProps) => {
       {activeDescCreate && (
         <Modal setActive={setActiveDescCreate} active={activeDescCreate}>
           <SetDataForm
-            prev={content.desc}
+            prev={cardContent.desc}
             close={closeDescCreate}
             changeData={(e:string) => setCardDesc(e)}
             placeholder={"Enter new card description:"}

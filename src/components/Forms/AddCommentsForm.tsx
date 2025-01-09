@@ -13,38 +13,31 @@ type AddCommentFormProps={
 }
 
 const AddCommentsForm = ({create,close,placeholder}:AddCommentFormProps)=>{
-
     const id = utiles.makeid(4);
     let userName:string=data.Get("User name") || "defult name";
-    const [comment,setComment] = useState<CommentsType>({
-        text:'',
-        commentId:id,
-        user:userName
-    });
+
+    const [commentText,setCommentText] = useState<string>('');
 
     const handleText = (e:React.ChangeEvent<HTMLInputElement>)=>{
-      setComment((prev)=>({
-            ...prev,
-            text: e.target.value
-        }))
+      setCommentText(e.target.value)
     }
 
     const saveComment = ()=>{
-        if(comment.text === ""){
+        if(commentText === ""){
             return;
         }
-        create(comment);
-        setComment({
-            text:'',
+        let data:CommentsType ={
+            text:commentText,
             commentId:id,
             user:userName
-        })
+        }
+        create(data);
         close();
     }
 
     return (
         <div>
-            <input value={comment.text} onChange={handleText} name="" id="" placeholder={placeholder}></input>
+            <input value={commentText} onChange={handleText} name="" id="" placeholder={placeholder}></input>
             <div className='flex p-1'>
                 <button onClick={()=>saveComment()} className='p-1 rounded bg-sky-600 text-white mr-2'>Add Comment</button>
             </div>
