@@ -19,16 +19,19 @@ interface cardContent {
 type TableProps={
   tableId:number,
   rename:(arg:Object)=>void
+  // TODO: Каждой таблице не к чему оперировать данными о всех таблицах (В контексте твоей задачи одна таблица вообще ничего не должна знать о других)
   table:TableNamesData
 }
 
 const Table = ({rename,tableId,table}:TableProps)=>{
   
   const [tableName,setTableName] = useState<string>(table[tableId].name) ;
+  // TODO: Кто active? по названию стейта совершенно не понятно для чего он предназначен
   const [active,setActive] = useState<boolean>(false);
 
   const close=()=>setActive(false);
 
+  // TODO: Наименование метода/функции должно быть глаголом (и опять непонятно, почему с большой буквы)
   const NewName=(e:string)=>{
     let newData = structuredClone(table);
     newData[tableId].name = e;

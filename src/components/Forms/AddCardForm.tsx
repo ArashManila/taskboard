@@ -13,6 +13,8 @@ type AddCardFormProps={
 const AddCardForm = ({create,close,tid}:AddCardFormProps)=>{
 
     const id = utiles.makeid(5);
+    // TODO: Зачем целиком всю сущность карточки держать в стейте, если у тебя от стейта зависят только поля title и desc. При чем обновляются они отдельно?
+    //  Лучше сделать эти два поля отдельными состояниями
     const [card,setCard] = useState({
         title:'',
         desc:'',
@@ -38,6 +40,7 @@ const AddCardForm = ({create,close,tid}:AddCardFormProps)=>{
             return;
         }
         create(card);
+        // TODO: Нет необходимости сбрасывать состояние компонента, если после закрытия он размантируется (состояние и так сбросится)
         setCard({
             title:'',
             desc:'',

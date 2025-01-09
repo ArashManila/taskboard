@@ -17,6 +17,7 @@ export interface CardsData{
   }
 }
 
+// TODO: Здесь хранятся не только имена. Название TableNamesData -- не корректно
 export interface TableNamesData{
   [key:number]:{
     id:number,

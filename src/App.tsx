@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+// TODO: Не называй объекты глаголом, так называются функции
 import getData from "./DataManagment/getData";
 
 import Modal from "./components/Modal/Modal";
@@ -9,6 +10,7 @@ import Main from "./components/Main";
 
 
 function App() {
+  // TODO: Очевидно, что это локальный стейт формы аутентификации, зачем он вынесен в глобальный app?
   const [userName,setUserName] = useState<string>('');
   const [isActive,setIsActive] = useState<boolean>(false);
   

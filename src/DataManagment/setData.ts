@@ -47,5 +47,5 @@ const SetCommentdata = (table:string,newComment:CommentsType)=>{
   }
 }
 
-
+// TODO: Странное решение -- разделять получение и установку данных на разные сервисы в данном контексте
 export default {Set,SetTableData,SetCardData,SetCommentdata};
