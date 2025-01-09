@@ -16,8 +16,11 @@ export interface CardsData{
     [cardId:string]:CardType
   }
 }
-
-export interface TableData{
+export type TableData={
+  id:number,
+  name:string
+}
+export interface TablesData{
   [key:number]:{
     id:number,
     name:string

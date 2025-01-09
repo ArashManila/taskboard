@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Table from "./Table/Table";
 import data from "../DataManagment/Data";
-import { TableData } from "../types/types";
+import { TableData, TablesData } from "../types/types";
 
 
 const Main = () => {
@@ -13,7 +13,7 @@ const Main = () => {
   }
   
 
-  const [tablesData,setTablesData] = useState<TableData>(()=>{
+  const [tablesData,setTablesData] = useState<TablesData>(()=>{
     const newData = data.Get("Tablesdata");
     return newData
       ? JSON.parse(newData)
@@ -26,16 +26,24 @@ const Main = () => {
     data.Set("Tablesdata",JSON.stringify(tablesData))
   }, [tablesData]);
 
+  const updateTableData = (data:TableData)=>{
+    setTablesData((tables:TablesData)=>{
+      const newData = structuredClone(tables);
+      newData[data.id]=data;
+      return newData;
+    })
+  }
+
   
   
   return (
     <main className="content container">
       <div className="board">
         <ul className="board__list">
-          {tablesData && <Table table={tablesData} tableId={0} rename={setTablesData}/>}
-          {tablesData && <Table table={tablesData} tableId={1} rename={setTablesData}/>}
-          {tablesData && <Table table={tablesData} tableId={2} rename={setTablesData}/>}
-          {tablesData && <Table table={tablesData} tableId={3} rename={setTablesData}/>}
+          {tablesData && <Table table={tablesData[0]} tableId={0} updateTableData={updateTableData}/>}
+          {tablesData && <Table table={tablesData[1]} tableId={1} updateTableData={updateTableData}/>}
+          {tablesData && <Table table={tablesData[2]} tableId={2} updateTableData={updateTableData}/>}
+          {tablesData && <Table table={tablesData[3]} tableId={3} updateTableData={updateTableData}/>}
         </ul>
       </div>
     </main>
