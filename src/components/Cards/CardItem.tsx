@@ -9,13 +9,13 @@ import deletion from "../../icons/delete.png";
 import SetDataForm from "../Forms/SetDataForm";
 import CardInfo from "./CardInfo";
 
-import { CardsData, CardType } from "../../types/types";
+import { CardType } from "../../types/types";
 import data from "../../DataManagment/Data";
 
 
 type CardProps={
   content:CardType,
-  updateCardState:(arg:CardType)=>void
+  updateCardState:(arg:CardType)=>void,
 }
 
 const CardItem = ({ content,updateCardState }:CardProps) => {
@@ -38,19 +38,26 @@ const CardItem = ({ content,updateCardState }:CardProps) => {
     setActiveCard(false)
   }
 
-  const RemoveCard = (card_id:string)=>{
-    let newData=structuredClone(data.GetFornmatted("cardsData"));
-    delete newData[content.tableId][card_id];
-    updateCardState(newData);
-  }
+  // const RemoveCard = (card_id:string)=>{
+  //   let newData=structuredClone(content);
+  //   delete newData;
+  //   updateCardState(newData);
+  // }
 
-  const RemoveCardDesc = (table_id:number,card_id:string)=>{
+  const RemoveCardDesc = ()=>{
     let newData=structuredClone(content);
     newData.desc = "";
     updateCardState(newData);
   }
+  // const RemoveCardDesc = ()=>{
+  //   let newData=structuredClone(content);
+  //   newData["desc"]='';
+
+  //   updateCardState(newData);
+  // }
 
   const setCardDesc = (newDesc:string)=>{
+
     let newData=structuredClone(content);
     newData.desc=newDesc;
     updateCardState(newData);
@@ -71,7 +78,7 @@ const CardItem = ({ content,updateCardState }:CardProps) => {
   };
 
   let commentsCount:number = data.GetFornmatted("commentsData")[content.cardId] || 0;
-  let commentsNumber=Object.values(commentsCount).length;
+  let commentsNumber:number=Object.values(commentsCount).length;
   
   return (
     <li className="card__item" onClick={() => setActiveCard(true)}>
@@ -92,7 +99,7 @@ const CardItem = ({ content,updateCardState }:CardProps) => {
             <>
               <div onClick={HandleDeleteDesc}>
                 <img
-                  onClick={() => RemoveCardDesc(content.tableId, content.cardId)}
+                  onClick={RemoveCardDesc}
                   src={deletion}
                   alt=""
                 />
@@ -122,7 +129,7 @@ const CardItem = ({ content,updateCardState }:CardProps) => {
         <button
           className="card__item-footer-button button button-pink"
           type="button"
-          onClick={() => RemoveCard(content.cardId)}
+          // onClick={() => removeCard(content.tableId,content.cardId)}
         >
           Delete
         </button>

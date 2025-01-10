@@ -31,7 +31,7 @@ const Table = ({updateTableData,tableId,table}:TableProps)=>{
   const setNewTableName=(e:string)=>{
     let newData:TableData = structuredClone(table);
     newData.name = e;
-    setTableName(e.toString());
+    setTableName(e);
     updateTableData(newData);
   }
 
@@ -47,15 +47,14 @@ const Table = ({updateTableData,tableId,table}:TableProps)=>{
 
     const updateCardData = (data: CardType) => {
       setCardsData((cards: CardsData) => {
-        const newCardsData = structuredClone(cards);
+        const newCardsData = JSON.parse(JSON.stringify(cards));
         newCardsData[data.tableId][data.cardId] = data;
         return newCardsData;
       })
     }
 
-
   let filteredCards:cardContent = cardsData[table.id] || {};
-    
+  
   return(
     <li className="board-item" >
       <div className="board__title-wrapper">
