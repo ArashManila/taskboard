@@ -45,9 +45,14 @@ const Table = ({updateTableData,tableId,table}:TableProps)=>{
       data.Set("cardsData",JSON.stringify(cardsData))
     }, [cardsData]);
 
-  const updateCardData = (data:CardType)=>{
-    
-  }
+    const updateCardData = (data: CardType) => {
+      setCardsData((cards: CardsData) => {
+        const newCardsData = structuredClone(cards);
+        newCardsData[data.tableId][data.cardId] = data;
+        return newCardsData;
+      })
+    }
+
 
   let filteredCards:cardContent = cardsData[table.id] || {};
     
@@ -65,7 +70,7 @@ const Table = ({updateTableData,tableId,table}:TableProps)=>{
       <AddCard updateCardState={setCardsData} tableId={tableId}/>
       <ul className="card__list">
       {Object.entries(filteredCards).map(([key, value]) => (
-          <CardItem updateCardState={setCardsData} content={value} key={key} />
+          <CardItem updateCardState={updateCardData} content={value} key={key} />
         ))} 
       </ul>
     </li>

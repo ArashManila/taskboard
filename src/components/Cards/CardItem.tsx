@@ -15,7 +15,7 @@ import data from "../../DataManagment/Data";
 
 type CardProps={
   content:CardType,
-  updateCardState:React.Dispatch<React.SetStateAction<CardsData>>
+  updateCardState:(arg:CardType)=>void
 }
 
 const CardItem = ({ content,updateCardState }:CardProps) => {
@@ -45,19 +45,19 @@ const CardItem = ({ content,updateCardState }:CardProps) => {
   }
 
   const RemoveCardDesc = (table_id:number,card_id:string)=>{
-    let newData=structuredClone(data.GetFornmatted("cardsData"));
-    newData[table_id][card_id].desc = "";
+    let newData=structuredClone(content);
+    newData.desc = "";
     updateCardState(newData);
   }
 
   const setCardDesc = (newDesc:string)=>{
-    let newData=structuredClone(data.GetFornmatted("cardsData"));
-    newData[content.tableId][content.cardId].desc=newDesc;
+    let newData=structuredClone(content);
+    newData.desc=newDesc;
     updateCardState(newData);
   }
   const ChangeCardTitle = (newTitle:string)=>{
-    let newData=structuredClone(data.GetFornmatted("cardsData"));
-    newData[content.tableId][content.cardId].title=newTitle;
+    let newData=structuredClone(content);
+    newData.title=newTitle;
     updateCardState(newData);
   }
 
