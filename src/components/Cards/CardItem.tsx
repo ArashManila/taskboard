@@ -16,9 +16,10 @@ import data from "../../DataManagment/Data";
 type CardProps={
   content:CardType,
   updateCardState:(arg:CardType)=>void,
+  remove:(arg1:number,arg2:string)=>void
 }
 
-const CardItem = ({ content,updateCardState }:CardProps) => {
+const CardItem = ({ remove,content,updateCardState }:CardProps) => {
   const [activeCard, setActiveCard] = useState(false);
   const [activeTitleEdit, setActiveTitleEdit] = useState(false);
   const [activeDescEdit, setActiveDescEdit] = useState(false);
@@ -38,11 +39,6 @@ const CardItem = ({ content,updateCardState }:CardProps) => {
     setActiveCard(false)
   }
 
-  // const RemoveCard = (card_id:string)=>{
-  //   let newData=structuredClone(content);
-  //   delete newData;
-  //   updateCardState(newData);
-  // }
 
   const RemoveCardDesc = ()=>{
     const newData=structuredClone(content);
@@ -123,7 +119,7 @@ const CardItem = ({ content,updateCardState }:CardProps) => {
         <button
           className="card__item-footer-button button button-pink"
           type="button"
-          // onClick={() => removeCard(content.tableId,content.cardId)}
+          onClick={() => remove(content.tableId,content.cardId)}
         >
           Delete
         </button>

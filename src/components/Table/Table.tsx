@@ -15,10 +15,11 @@ type TableProps={
   updateTableData:(arg:TableData)=>void
   table:TableData,
   cardsData:cardContent,
-  updateCardData:(arg:CardType)=>void
+  updateCardData:(arg:CardType)=>void,
+  removeCard:(arg1:number,arg2:string)=>void
 }
 
-const Table = ({updateCardData,cardsData,updateTableData,tableId,table}:TableProps)=>{
+const Table = ({removeCard,updateCardData,cardsData,updateTableData,tableId,table}:TableProps)=>{
   
   const [tableName,setTableName] = useState<string>(table.name) ;
   const [active,setActive] = useState<boolean>(false);
@@ -31,12 +32,6 @@ const Table = ({updateCardData,cardsData,updateTableData,tableId,table}:TablePro
     setTableName(e);
     updateTableData(newData);
   }
-
-  const removeCard=(id:strinng)=>{
-    const newData = structuredClone(cardsData);
-    delete newData[id];
-  }
-
 
   const filteredCards:cardContent = cardsData || {};
   
@@ -54,7 +49,7 @@ const Table = ({updateCardData,cardsData,updateTableData,tableId,table}:TablePro
       <AddCard updateCardState={updateCardData} tableId={tableId}/>
       <ul className="card__list">
       {Object.entries(filteredCards).map(([key, value]) => (
-          <CardItem updateCardState={updateCardData} content={value} key={key} />
+          <CardItem remove={removeCard} updateCardState={updateCardData} content={value} key={key} />
         ))} 
       </ul>
     </li>

@@ -7,6 +7,8 @@ type DataFormProps={
     changeData:(prev:string)=>void
 }
 const SetDataForm = ({changeData,placeholder,close,prev}: DataFormProps)=>{
+    console.log(prev);
+    
         
     const[newData,setNewData] = useState(prev);
     const saveData = ()=>{

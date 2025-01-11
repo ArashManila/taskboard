@@ -16,21 +16,17 @@ type CommentBlockProps={
   remove: (arg1:string,arg2:string)=>void
 }
 
-const CommentsBlock = ({ remove,comments,updateCommentsState,card }:CommentBlockProps) => {
+const CommentsBlock = ({remove,comments,updateCommentsState,card}:CommentBlockProps) => {
 
   const [activeCommentEdit, setActiveCommentEdit] = useState(false);
 
 
-  // const RemoveComment = (comment_id:string)=>{
-  //   const newData=structuredClone(data.GetFornmatted("commentsData"));
-  //   delete newData[card][comment_id];
-  //   updateCommentsState(newData);
-  // }
-
   const EditComment = (e:string,comment_id:string) => {
     const newData=structuredClone(comments);
-    newData[comment_id].text = e;
-    updateCommentsState(newData[card]);
+    //newData[comment_id].text = e;
+    // updateCommentsState(newData[card]);
+    console.log(newData[comment_id].text);
+    
   };
 
   const Handle = (e:React.MouseEvent<HTMLImageElement>) => {
@@ -55,7 +51,7 @@ const CommentsBlock = ({ remove,comments,updateCommentsState,card }:CommentBlock
                   alt=""
                   onClick={()=>remove(value.cardId,value.commentId)}
                 />
-                <img src={edit} alt="" onClick={Handle} />
+                <img src={edit} alt="" onClick={(e)=>Handle(e)} />
               </div>
             </div>
             <div className="card__item-comments-item-content">{value.text}</div>
