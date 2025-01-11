@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Table from "./Table/Table";
 import data from "../DataManagment/Data";
 import { TableData, TablesData } from "../types/types";
+import Tables from "./Tables";
 
 
 const Main = () => {
@@ -12,7 +13,6 @@ const Main = () => {
     3:{id:3,name:"Done"}
   }
   
-
   const [tablesData,setTablesData] = useState<TablesData>(()=>{
     const newData = data.Get("Tablesdata");
     return newData
@@ -20,8 +20,6 @@ const Main = () => {
       : tableNameData
   });
 
-  
-  
   useEffect(() => {
     data.Set("Tablesdata",JSON.stringify(tablesData))
   }, [tablesData]);
@@ -34,16 +32,15 @@ const Main = () => {
     })
   }
 
-  
-  
   return (
     <main className="content container">
       <div className="board">
         <ul className="board__list">
-          {tablesData && <Table table={tablesData[0]} tableId={0} updateTableData={updateTableData}/>}
+          {/* {tablesData && <Table table={tablesData[0]} tableId={0} updateTableData={updateTableData}/>}
           {tablesData && <Table table={tablesData[1]} tableId={1} updateTableData={updateTableData}/>}
           {tablesData && <Table table={tablesData[2]} tableId={2} updateTableData={updateTableData}/>}
-          {tablesData && <Table table={tablesData[3]} tableId={3} updateTableData={updateTableData}/>}
+          {tablesData && <Table table={tablesData[3]} tableId={3} updateTableData={updateTableData}/>} */}
+          <Tables tables={tablesData} updateTableData={updateTableData}/>
         </ul>
       </div>
     </main>
