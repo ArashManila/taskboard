@@ -75,7 +75,6 @@ const CardInfo = ({ content }:CardInfoProps) => {
         <CommentsBlock
           comments={commentsData[content.cardId]}
           updateCommentsState={updateCommentsData}
-          card={content.cardId}
           remove={removeComment}
         />
       </ul>
