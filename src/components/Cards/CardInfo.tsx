@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 
 import addition from "../../icons/add.png";
 
@@ -7,11 +7,12 @@ import AddCommentsForm from "../Forms/AddCommentsForm";
 import CommentsBlock from "../Comments/CommentsBlock";
 
 import { CardType, CommentsObjectType, CommentsType } from "../../types/types";
+
 import data from "../../DataManagment/Data";
 
 type CardInfoProps={
   content:CardType,
-  close:()=>void
+  close:()=>void,
 }
 
 const CardInfo = ({ content }:CardInfoProps) => {
@@ -26,18 +27,28 @@ const CardInfo = ({ content }:CardInfoProps) => {
     else return {}
   })
   
-
   useEffect(()=>{
     data.Set("commentsData",JSON.stringify(commentsData))
   },[commentsData])
 
-  const CreateComment = (dataInfo:CommentsType)=>{
-    data.SetCommentdata(content.cardId,dataInfo);
-    let newData = structuredClone(data.GetFornmatted("commentsData"));
-    setCommentsData(newData);
+  const updateCommentsData = (data:CommentsType)=>{
+    setCommentsData((prevComments:CommentsObjectType)=>{
+      const newData = structuredClone(prevComments);
+      if(!newData[data.cardId]) newData[data.cardId] ={};
+      if(!newData[data.cardId][data.commentId]) newData[data.cardId][data.commentId] = {...data}
+      newData[data.cardId][data.commentId] = data;
+      return newData;
+    })
+  }
+
+  const removeComment = (card_id:string, comment_id:string)=>{
+    setCommentsData((prevCommentsData)=>{
+      const newData = structuredClone(prevCommentsData);
+      delete newData[card_id][comment_id];
+      return newData;
+    })
   }
   
-  let filteredComments: { [key: string]: CommentsType } = commentsData[content.cardId];
   
   return (
     <>
@@ -62,9 +73,10 @@ const CardInfo = ({ content }:CardInfoProps) => {
 
       <ul className="card__item-comments-block">
         <CommentsBlock
-          comments={filteredComments}
-          updateCommentsState={setCommentsData}
+          comments={commentsData[content.cardId]}
+          updateCommentsState={updateCommentsData}
           card={content.cardId}
+          remove={removeComment}
         />
       </ul>
 
@@ -72,8 +84,9 @@ const CardInfo = ({ content }:CardInfoProps) => {
         <Modal active={activeCommentCreate} setActive={setActiveCommentCreate}>
           <AddCommentsForm
             close={close}
-            create={(e:CommentsType) => CreateComment(e)}
+            create={(e:CommentsType) => updateCommentsData(e)}
             placeholder="Enter your comment:"
+            card={content.cardId}
           />
         </Modal>
       )}

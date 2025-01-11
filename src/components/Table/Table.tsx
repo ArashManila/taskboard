@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import Edit from '../../icons/edit.png'
 
@@ -6,12 +6,9 @@ import Modal from "../Modal/Modal";
 import SetDataForm from "../Forms/SetDataForm";
 import CardItem from "../Cards/CardItem";
 
-import { CardType, TableData } from "../../types/types";
+import { cardContent, CardType, TableData } from "../../types/types";
+import AddCard from "../Cards/AddCard";
 
-
-interface cardContent {
-  [key: string]: CardType;
-}
 
 type TableProps={
   tableId:number,
@@ -29,13 +26,19 @@ const Table = ({updateCardData,cardsData,updateTableData,tableId,table}:TablePro
   const close=()=>setActive(false);
 
   const setNewTableName=(e:string)=>{
-    let newData:TableData = structuredClone(table);
+    const newData:TableData = structuredClone(table);
     newData.name = e;
     setTableName(e);
     updateTableData(newData);
   }
 
-  let filteredCards:cardContent = cardsData || {};
+  const removeCard=(id:strinng)=>{
+    const newData = structuredClone(cardsData);
+    delete newData[id];
+  }
+
+
+  const filteredCards:cardContent = cardsData || {};
   
   return(
     <li className="board-item" >
@@ -48,7 +51,7 @@ const Table = ({updateCardData,cardsData,updateTableData,tableId,table}:TablePro
           </Modal>}
         </div>
       </div>
-      {/* <AddCard updateCardState={updateCardData} tableId={tableId}/> */}
+      <AddCard updateCardState={updateCardData} tableId={tableId}/>
       <ul className="card__list">
       {Object.entries(filteredCards).map(([key, value]) => (
           <CardItem updateCardState={updateCardData} content={value} key={key} />

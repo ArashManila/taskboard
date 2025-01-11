@@ -6,30 +6,31 @@ import SetDataForm from "../Forms/SetDataForm";
 import deletion from "../../icons/delete.png";
 import edit from "../../icons/edit.png";
 
-import { CommentsObjectType, CommentsType } from "../../types/types";
-import data from "../../DataManagment/Data";
+import { CommentsType } from "../../types/types";
+// import data from "../../DataManagment/Data";
 
 type CommentBlockProps={
   comments: {[key: string]: CommentsType},
-  updateCommentsState:(arg:CommentsObjectType)=>void,
-  card:string
+  updateCommentsState:(arg:CommentsType)=>void,
+  card:string,
+  remove: (arg1:string,arg2:string)=>void
 }
 
-const CommentsBlock = ({ comments,updateCommentsState,card }:CommentBlockProps) => {
+const CommentsBlock = ({ remove,comments,updateCommentsState,card }:CommentBlockProps) => {
 
   const [activeCommentEdit, setActiveCommentEdit] = useState(false);
 
 
-  const RemoveComment = (comment_id:string)=>{
-    let newData=structuredClone(data.GetFornmatted("commentsData"));
-    delete newData[card][comment_id];
-    updateCommentsState(newData);
-  }
+  // const RemoveComment = (comment_id:string)=>{
+  //   const newData=structuredClone(data.GetFornmatted("commentsData"));
+  //   delete newData[card][comment_id];
+  //   updateCommentsState(newData);
+  // }
 
   const EditComment = (e:string,comment_id:string) => {
-    let newData=structuredClone(data.GetFornmatted("commentsData"));
-    newData[card][comment_id].text = e;
-    updateCommentsState(newData);
+    const newData=structuredClone(comments);
+    newData[comment_id].text = e;
+    updateCommentsState(newData[card]);
   };
 
   const Handle = (e:React.MouseEvent<HTMLImageElement>) => {
@@ -52,7 +53,7 @@ const CommentsBlock = ({ comments,updateCommentsState,card }:CommentBlockProps) 
                 <img
                   src={deletion}
                   alt=""
-                  onClick={()=>RemoveComment(value.commentId)}
+                  onClick={()=>remove(value.cardId,value.commentId)}
                 />
                 <img src={edit} alt="" onClick={Handle} />
               </div>

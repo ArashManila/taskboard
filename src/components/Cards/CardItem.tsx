@@ -45,25 +45,18 @@ const CardItem = ({ content,updateCardState }:CardProps) => {
   // }
 
   const RemoveCardDesc = ()=>{
-    let newData=structuredClone(content);
+    const newData=structuredClone(content);
     newData.desc = "";
     updateCardState(newData);
   }
-  // const RemoveCardDesc = ()=>{
-  //   let newData=structuredClone(content);
-  //   newData["desc"]='';
-
-  //   updateCardState(newData);
-  // }
 
   const setCardDesc = (newDesc:string)=>{
-
-    let newData=structuredClone(content);
+    const newData=structuredClone(content);
     newData.desc=newDesc;
     updateCardState(newData);
   }
   const ChangeCardTitle = (newTitle:string)=>{
-    let newData=structuredClone(content);
+    const newData=structuredClone(content);
     newData.title=newTitle;
     updateCardState(newData);
   }
@@ -77,8 +70,9 @@ const CardItem = ({ content,updateCardState }:CardProps) => {
     e.stopPropagation();
   };
 
-  let commentsCount:number = data.GetFornmatted("commentsData")[content.cardId] || 0;
-  let commentsNumber:number=Object.values(commentsCount).length;
+  const commentsCount:number = data.GetFornmatted("commentsData")[content.cardId] || 0;
+  const commentsNumber:number=Object.values(commentsCount).length;
+
   
   return (
     <li className="card__item" onClick={() => setActiveCard(true)}>
