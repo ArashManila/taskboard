@@ -4,12 +4,10 @@ import Edit from '../../icons/edit.png'
 
 import Modal from "../Modal/Modal";
 import SetDataForm from "../Forms/SetDataForm";
-import AddCard from '../Cards/AddCard';
 import CardItem from "../Cards/CardItem";
 
-import { CardsData, CardType, TableData } from "../../types/types";
+import { CardType, TableData } from "../../types/types";
 
-import data from "../../DataManagment/Data";
 
 interface cardContent {
   [key: string]: CardType;
@@ -18,10 +16,12 @@ interface cardContent {
 type TableProps={
   tableId:number,
   updateTableData:(arg:TableData)=>void
-  table:TableData
+  table:TableData,
+  cardsData:cardContent,
+  updateCardData:(arg:CardType)=>void
 }
 
-const Table = ({updateTableData,tableId,table}:TableProps)=>{
+const Table = ({updateCardData,cardsData,updateTableData,tableId,table}:TableProps)=>{
   
   const [tableName,setTableName] = useState<string>(table.name) ;
   const [active,setActive] = useState<boolean>(false);
@@ -35,7 +35,7 @@ const Table = ({updateTableData,tableId,table}:TableProps)=>{
     updateTableData(newData);
   }
 
-  let filteredCards:cardContent = cardsData[table.id] || {};
+  let filteredCards:cardContent = cardsData || {};
   
   return(
     <li className="board-item" >
@@ -48,7 +48,7 @@ const Table = ({updateTableData,tableId,table}:TableProps)=>{
           </Modal>}
         </div>
       </div>
-      <AddCard updateCardState={setCardsData} tableId={tableId}/>
+      {/* <AddCard updateCardState={updateCardData} tableId={tableId}/> */}
       <ul className="card__list">
       {Object.entries(filteredCards).map(([key, value]) => (
           <CardItem updateCardState={updateCardData} content={value} key={key} />

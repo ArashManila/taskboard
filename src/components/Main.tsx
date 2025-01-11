@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Table from "./Table/Table";
 import data from "../DataManagment/Data";
 import { TableData, TablesData } from "../types/types";
 import Tables from "./Tables";
@@ -40,7 +39,7 @@ const Main = () => {
           {tablesData && <Table table={tablesData[1]} tableId={1} updateTableData={updateTableData}/>}
           {tablesData && <Table table={tablesData[2]} tableId={2} updateTableData={updateTableData}/>}
           {tablesData && <Table table={tablesData[3]} tableId={3} updateTableData={updateTableData}/>} */}
-          <Tables tables={tablesData} updateTableData={updateTableData}/>
+          <Tables tablesData={tablesData} updateTableData={updateTableData}/>
         </ul>
       </div>
     </main>
