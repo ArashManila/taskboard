@@ -26,7 +26,7 @@ const AddCardForm = ({create,close,tid}:AddCardFormProps)=>{
 
   const saveCard = ()=>{
     if(cardTitle === "") return;
-    let data:CardType ={
+    const data:CardType ={
         title:cardTitle,
         desc:cardDesc,
         cardId:id,
