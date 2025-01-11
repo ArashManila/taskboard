@@ -20,7 +20,6 @@ const Comment = ({updateCommentsState,remove, content}:CommentProps)=>{
     updateCommentsState(newData);
   };
 
-
   const Handle = (e:React.MouseEvent<HTMLImageElement>) => {
     e.stopPropagation();
     setActiveCommentEdit(true);

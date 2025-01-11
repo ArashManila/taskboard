@@ -35,10 +35,6 @@ const Main = () => {
     <main className="content container">
       <div className="board">
         <ul className="board__list">
-          {/* {tablesData && <Table table={tablesData[0]} tableId={0} updateTableData={updateTableData}/>}
-          {tablesData && <Table table={tablesData[1]} tableId={1} updateTableData={updateTableData}/>}
-          {tablesData && <Table table={tablesData[2]} tableId={2} updateTableData={updateTableData}/>}
-          {tablesData && <Table table={tablesData[3]} tableId={3} updateTableData={updateTableData}/>} */}
           <Tables tablesData={tablesData} updateTableData={updateTableData}/>
         </ul>
       </div>

@@ -9,7 +9,6 @@ type ModalProps = {
 }
 
 const Modal=({active,setActive,children}:ModalProps)=>{
-    
     const escFunction = useCallback((event:KeyboardEvent) => {
       event.stopPropagation();
         if (event.key === "Escape" && data.Get('User name')) setActive(false);
