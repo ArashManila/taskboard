@@ -22,9 +22,9 @@ type TableProps={
 const Table = ({removeCard,updateCardData,cardsData,updateTableData,tableId,table}:TableProps)=>{
   
   const [tableName,setTableName] = useState<string>(table.name) ;
-  const [active,setActive] = useState<boolean>(false);
+  const [activeTableNameEdit,setActiveTableNameEdit] = useState<boolean>(false);
 
-  const close=()=>setActive(false);
+  const close=()=>setActiveTableNameEdit(false);
 
   const setNewTableName=(e:string)=>{
     const newData:TableData = structuredClone(table);
@@ -40,8 +40,8 @@ const Table = ({removeCard,updateCardData,cardsData,updateTableData,tableId,tabl
       <div className="board__title-wrapper">
         <h2 className="board__title">{tableName}</h2>
         <div>
-          <img src={Edit} alt="edit" onClick={()=>setActive(true)}/>
-          {active && <Modal active={active} setActive={setActive}>
+          <img src={Edit} alt="edit" onClick={()=>setActiveTableNameEdit(true)}/>
+          {activeTableNameEdit && <Modal active={activeTableNameEdit} setActive={setActiveTableNameEdit}>
             <SetDataForm changeData={(e)=>setNewTableName(e)} placeholder="Enter new title" prev={tableName} close={close}/>
           </Modal>}
         </div>
