@@ -13,9 +13,9 @@ type AddCardProps ={
 const AddCard = ({tableId,updateCardState}:AddCardProps) => {
   
   
-  const [active, setActive] = useState(false);
+  const [activeCardCreate, setActiveCardCreate] = useState(false);
 
-  const CloseModal = () => setActive(false);
+  const CloseModal = () => setActiveCardCreate(false);
 
   const CreateCard = (dataInfo:CardType)=>{
     updateCardState(dataInfo);
@@ -25,12 +25,12 @@ const AddCard = ({tableId,updateCardState}:AddCardProps) => {
     <>
       <button
         className="button-pink button-add board__item-button-add"
-        onClick={()=>setActive(true)}
+        onClick={()=>setActiveCardCreate(true)}
       >
         +
       </button>
-      {active && (
-        <Modal active={active} setActive={setActive}>
+      {activeCardCreate && (
+        <Modal active={activeCardCreate} setActive={setActiveCardCreate}>
           <AddCardForm tid={tableId} create={CreateCard} close={CloseModal}  />
         </Modal>
       )}
