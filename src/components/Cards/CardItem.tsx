@@ -10,7 +10,7 @@ import SetDataForm from "../Forms/SetDataForm";
 import CardInfo from "./CardInfo";
 
 import { CardType } from "../../types/types";
-import data from "../../DataManagment/Data";
+import data from "../../DataManagment/data";
 
 
 type CardProps={

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import data from './DataManagment/Data'
+import data from './DataManagment/data';
 
 import Modal from "./components/Modal/Modal";
 import AuthForm from "./components/Forms/AuthForm";

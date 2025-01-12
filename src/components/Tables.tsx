@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { CardsData, CardType, TableData, TablesData } from "../types/types"
 
-import data from "../DataManagment/Data";
+import data from "../DataManagment/data";
 import Table from "./Table/Table";
 
 

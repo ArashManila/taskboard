@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import data from "../DataManagment/Data";
+import data from "../DataManagment/data";
 import { TableData, TablesData } from "../types/types";
 import Tables from "./Tables";
 

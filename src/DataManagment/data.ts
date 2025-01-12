@@ -29,18 +29,18 @@ const SetCardData = (table: number, value: CardType) => {
   const cardData = localStorage.getItem("cardsData");
   
   if (cardData) {
-      const c: string = cardData;
-      const copy: { [key: number]: { [key: string]: CardType } } = JSON.parse(c);
-      if (!copy[table]) {
-          copy[table] = {};
-      }
-      copy[table][value.cardId] = { ...copy[table][value.cardId], ...value };
-      return localStorage.setItem("cardsData", JSON.stringify(copy));
+    const c: string = cardData;
+    const copy: { [key: number]: { [key: string]: CardType } } = JSON.parse(c);
+    if (!copy[table]) {
+        copy[table] = {};
+    }
+    copy[table][value.cardId] = { ...copy[table][value.cardId], ...value };
+    return localStorage.setItem("cardsData", JSON.stringify(copy));
   } else {
-      const newObject: { [key: number]: { [key: string]: CardType } } = {};
-      newObject[table] = {};
-      newObject[table][value.cardId] = value;
-      return localStorage.setItem("cardsData", JSON.stringify(newObject));
+    const newObject: { [key: number]: { [key: string]: CardType } } = {};
+    newObject[table] = {};
+    newObject[table][value.cardId] = value;
+    return localStorage.setItem("cardsData", JSON.stringify(newObject));
   }
 }
 

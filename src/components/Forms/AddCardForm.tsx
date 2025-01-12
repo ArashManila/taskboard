@@ -18,19 +18,19 @@ const AddCardForm = ({create,close,tid}:AddCardFormProps)=>{
   const [cardDesc,setCardDesc] = useState<string>('');
 
   const handleTitle = (e:React.ChangeEvent<HTMLInputElement>)=>{
-      setCardTitle(e.target.value)
+    setCardTitle(e.target.value)
   }
   const handleDesc = (e:React.ChangeEvent<HTMLInputElement>)=>{
-      setCardDesc(e.target.value)
+    setCardDesc(e.target.value)
   }
 
   const saveCard = ()=>{
     if(cardTitle === "") return;
     const data:CardType ={
-        title:cardTitle,
-        desc:cardDesc,
-        cardId:id,
-        tableId:tid
+      title:cardTitle,
+      desc:cardDesc,
+      cardId:id,
+      tableId:tid
     }
     create(data);
     close();
@@ -41,7 +41,7 @@ const AddCardForm = ({create,close,tid}:AddCardFormProps)=>{
       <input value={cardTitle} onChange={handleTitle} name="" id="" placeholder='Enter Card Title...'></input>
       <input value={cardDesc} onChange={handleDesc}  name="" id="" placeholder='Enter Card Desc...'></input>
       <div className='flex p-1'>
-          <button onClick={()=>saveCard()} className='p-1 rounded bg-sky-600 text-white mr-2'>Add Card</button>
+        <button onClick={()=>saveCard()} className='p-1 rounded bg-sky-600 text-white mr-2'>Add Card</button>
       </div>
     </div>
   );
